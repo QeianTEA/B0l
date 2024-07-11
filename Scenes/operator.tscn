@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://bi8plcpnfc6ol"]
+
+[ext_resource type="Texture2D" uid="uid://hlxrly7om340" path="res://Temp/Gomi4.png" id="1_5loti"]
+[ext_resource type="Script" path="res://Scripts/operator.gd" id="1_boi4f"]
+
+[node name="Operator" type="Node2D"]
+script = ExtResource("1_boi4f")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.0302283, 0.0302283)
+texture = ExtResource("1_5loti")
