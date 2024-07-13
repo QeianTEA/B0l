@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://chc4jlv0muqgq"]
+
+[ext_resource type="Texture2D" uid="uid://hlxrly7om340" path="res://Temp/Gomi4.png" id="1_mjxse"]
+
+[node name="GameScene" type="Node2D"]
+
+[node name="Kiraz" type="Sprite2D" parent="."]
+position = Vector2(572, 316)
+scale = Vector2(0.190833, 0.190833)
+texture = ExtResource("1_mjxse")
