@@ -1,11 +1,35 @@
-[gd_scene load_steps=3 format=3 uid="uid://bi8plcpnfc6ol"]
+[gd_scene load_steps=6 format=3 uid="uid://bqat16e5w0nyl"]
 
-[ext_resource type="Texture2D" uid="uid://hlxrly7om340" path="res://Temp/Gomi4.png" id="1_5loti"]
-[ext_resource type="Script" path="res://Scripts/operator.gd" id="1_boi4f"]
+[ext_resource type="Script" path="res://Scripts/operator.gd" id="1_kug7e"]
+[ext_resource type="Texture2D" uid="uid://hlxrly7om340" path="res://Temp/Gomi4.png" id="2_6l7va"]
+[ext_resource type="StyleBox" uid="uid://c06y0wimse3lc" path="res://Assets/PanelStyleMaps/OperatorHealthBar.tres" id="3_tjxfm"]
+[ext_resource type="StyleBox" uid="uid://c0tiqddh1k7p2" path="res://Assets/PanelStyleMaps/OperatorSelected.tres" id="4_ts5mu"]
 
-[node name="Operator" type="Node2D"]
-script = ExtResource("1_boi4f")
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nkenr"]
+size = Vector2(1422.51, 2878.1)
+
+[node name="Operator" type="CharacterBody2D" groups=["Operators"]]
+script = ExtResource("1_kug7e")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.0302283, 0.0302283)
-texture = ExtResource("1_5loti")
+texture = ExtResource("2_6l7va")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1.5)
+scale = Vector2(0.0302283, 0.0302283)
+shape = SubResource("RectangleShape2D_nkenr")
+
+[node name="HealthBar2" type="Panel" parent="."]
+offset_left = -20.0
+offset_top = -64.0
+offset_right = 20.0
+offset_bottom = -28.0
+theme_override_styles/panel = ExtResource("3_tjxfm")
+
+[node name="Selected" type="Panel" parent="."]
+offset_left = -20.0
+offset_top = -50.0
+offset_right = 20.0
+offset_bottom = -42.0
+theme_override_styles/panel = ExtResource("4_ts5mu")
