@@ -1,9 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://bqat16e5w0nyl"]
+[gd_scene load_steps=7 format=3 uid="uid://bqat16e5w0nyl"]
 
 [ext_resource type="Script" path="res://Scripts/operator.gd" id="1_kug7e"]
 [ext_resource type="Texture2D" uid="uid://hlxrly7om340" path="res://Temp/Gomi4.png" id="2_6l7va"]
 [ext_resource type="StyleBox" uid="uid://c06y0wimse3lc" path="res://Assets/PanelStyleMaps/OperatorHealthBar.tres" id="3_tjxfm"]
 [ext_resource type="StyleBox" uid="uid://c0tiqddh1k7p2" path="res://Assets/PanelStyleMaps/OperatorSelected.tres" id="4_ts5mu"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wruk6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nkenr"]
 size = Vector2(1422.51, 2878.1)
@@ -14,6 +16,10 @@ script = ExtResource("1_kug7e")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.0302283, 0.0302283)
 texture = ExtResource("2_6l7va")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.0302283, 0.0302283)
+sprite_frames = SubResource("SpriteFrames_wruk6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1.5)

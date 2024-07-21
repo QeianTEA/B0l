@@ -14,6 +14,8 @@ var follow_cursor = false
 var target_node = null
 var home_pos = Vector2.ZERO
 
+@warning_ignore("unassigned_variable", "unused_parameter")
+
 func _ready():
 	set_selected(selected)
 	home_pos = self.global_position
@@ -24,10 +26,10 @@ func set_selected(value):
 	selected = value
 	box.visible = value
 	
-func _input(event):
+func _input(_event):
 	pass
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	
 	if selected:
 		pass

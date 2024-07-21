@@ -2,6 +2,8 @@ extends Node2D
 
 var operators = []
 
+@warning_ignore("unassigned_variable", "unused_parameter")
+
 func _ready():
 	operators = get_tree().get_nodes_in_group("Operators")
 

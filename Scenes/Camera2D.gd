@@ -18,7 +18,7 @@ signal area_selected
 func _ready():
 	pass
 
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_pressed("LeftClick"):
 		start = mousePosGlobal
 		startV = mousePos
