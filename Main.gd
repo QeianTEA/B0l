@@ -10,3 +10,6 @@ func _ready():
 	var ship = ship_scene.instantiate()
 	add_child(ship)
 	ship.position = Vector2(700, 200)  # Initial position, adjust as needed
+	
+	var grid_container = grid.get_node("Control/GridContainer")
+	ship.set_grid_container(grid_container)
