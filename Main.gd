@@ -9,4 +9,4 @@ func _ready():
 	var ship_scene = preload("res://Tower.tscn")
 	var ship = ship_scene.instantiate()
 	add_child(ship)
-	ship.position = Vector2(200, 200)  # Initial position, adjust as needed
+	ship.position = Vector2(700, 200)  # Initial position, adjust as needed
