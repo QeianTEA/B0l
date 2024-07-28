@@ -1,13 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://chc4jlv0muqgq"]
+[gd_scene load_steps=6 format=3 uid="uid://chc4jlv0muqgq"]
 
-[ext_resource type="Script" path="res://Scenes/game_scene.gd" id="1_cshjr"]
+[ext_resource type="Script" path="res://Scripts/game_scene.gd" id="1_cshjr"]
 [ext_resource type="Texture2D" uid="uid://hlxrly7om340" path="res://Temp/Gomi4.png" id="1_mjxse"]
-[ext_resource type="Script" path="res://Scenes/Camera2D.gd" id="1_t7d0q"]
-[ext_resource type="Texture2D" uid="uid://btdf1i5tuafcp" path="res://Temp/image_45.png" id="2_s6k55"]
-[ext_resource type="PackedScene" uid="uid://bqat16e5w0nyl" path="res://Scenes/operator.tscn" id="3_l8d6g"]
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_pu1il"]
-texture = ExtResource("2_s6k55")
+[ext_resource type="Script" path="res://Scripts/Camera2D.gd" id="1_t7d0q"]
+[ext_resource type="PackedScene" uid="uid://bqat16e5w0nyl" path="res://Scenes/Operator.tscn" id="3_l8d6g"]
+[ext_resource type="PackedScene" uid="uid://cuigwtfuwq13q" path="res://Scenes/section.tscn" id="5_8rdun"]
 
 [node name="GameScene" type="Node2D"]
 script = ExtResource("1_cshjr")
@@ -20,7 +17,6 @@ offset_left = -45.0
 offset_top = -42.0
 offset_right = -5.0
 offset_bottom = -2.0
-theme_override_styles/panel = SubResource("StyleBoxTexture_pu1il")
 
 [node name="Kiraz" type="Sprite2D" parent="."]
 position = Vector2(1307, 294)
@@ -33,12 +29,10 @@ limit_top = 0
 script = ExtResource("1_t7d0q")
 
 [node name="Kiraz2" parent="." instance=ExtResource("3_l8d6g")]
-position = Vector2(406, 249)
+position = Vector2(445, 274)
+scale = Vector2(0.920898, 0.777734)
 
-[node name="GridContainer" type="GridContainer" parent="."]
-offset_left = -93.0
-offset_top = -25.0
-offset_right = -53.0
-offset_bottom = 15.0
+[node name="Section" parent="." instance=ExtResource("5_8rdun")]
+position = Vector2(567, 237)
 
 [connection signal="area_selected" from="Camera2D" to="." method="_on_area_selected"]
