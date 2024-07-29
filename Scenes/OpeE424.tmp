@@ -1,0 +1,94 @@
+[gd_scene load_steps=13 format=3 uid="uid://bqat16e5w0nyl"]
+
+[ext_resource type="Script" path="res://Scripts/operator.gd" id="1_kug7e"]
+[ext_resource type="Texture2D" uid="uid://hlxrly7om340" path="res://Temp/Gomi4.png" id="2_6l7va"]
+[ext_resource type="Texture2D" uid="uid://belf5c2lt5a5d" path="res://Assets/Operator/Sprites/1.png" id="3_8ugsq"]
+[ext_resource type="Texture2D" uid="uid://dx8usqqq3joa1" path="res://Assets/Operator/Sprites/7.png" id="3_4135j"]
+[ext_resource type="StyleBox" uid="uid://c06y0wimse3lc" path="res://Assets/PanelStyleMaps/OperatorHealthBar.tres" id="3_tjxfm"]
+[ext_resource type="Texture2D" uid="uid://colb3femnix1f" path="res://Assets/Operator/Sprites/2.png" id="4_0fdqp"]
+[ext_resource type="Texture2D" uid="uid://b2wl4oeckkpci" path="res://Assets/Operator/Sprites/4.png" id="4_pvtmw"]
+[ext_resource type="StyleBox" uid="uid://c0tiqddh1k7p2" path="res://Assets/PanelStyleMaps/OperatorSelected.tres" id="4_ts5mu"]
+[ext_resource type="Texture2D" uid="uid://dbsn4v8vxbx8n" path="res://Assets/Operator/Sprites/3.png" id="5_byq3s"]
+[ext_resource type="Texture2D" uid="uid://ctx1kyhn2yhgy" path="res://Assets/Operator/Sprites/5.png" id="6_6370a"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wruk6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_4135j")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_pvtmw")
+}],
+"loop": true,
+"name": &"check",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_8ugsq")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_6370a")
+}],
+"loop": true,
+"name": &"repair",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_0fdqp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_byq3s")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nkenr"]
+size = Vector2(1422.51, 2712.69)
+
+[node name="Operator" type="CharacterBody2D" groups=["Operators"]]
+script = ExtResource("1_kug7e")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(0.0302283, 0.0302283)
+texture = ExtResource("2_6l7va")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(1.77253, 2.157)
+sprite_frames = SubResource("SpriteFrames_wruk6")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1.00002)
+scale = Vector2(0.0302283, 0.0302283)
+shape = SubResource("RectangleShape2D_nkenr")
+
+[node name="HealthBar2" type="Panel" parent="."]
+offset_left = -20.0
+offset_top = -64.0
+offset_right = 20.0
+offset_bottom = -28.0
+theme_override_styles/panel = ExtResource("3_tjxfm")
+
+[node name="Selected" type="Panel" parent="."]
+offset_left = -20.0
+offset_top = -50.0
+offset_right = 20.0
+offset_bottom = -42.0
+theme_override_styles/panel = ExtResource("4_ts5mu")

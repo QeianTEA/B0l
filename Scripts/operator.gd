@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+
 @export var selected = false
 @onready var anim = $AnimatedSprite2D
 
@@ -31,7 +33,11 @@ func set_selected(value):
 func _input(_event):
 	pass
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta):
+	
+	if not is_on_floor():
+		velocity.y += gravity * delta
+	
 	
 	if selected:
 		pass

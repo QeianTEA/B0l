@@ -1,13 +1,18 @@
-[gd_scene load_steps=6 format=3 uid="uid://chc4jlv0muqgq"]
+[gd_scene load_steps=7 format=3 uid="uid://chc4jlv0muqgq"]
 
 [ext_resource type="Script" path="res://Scripts/game_scene.gd" id="1_cshjr"]
 [ext_resource type="Texture2D" uid="uid://hlxrly7om340" path="res://Temp/Gomi4.png" id="1_mjxse"]
 [ext_resource type="Script" path="res://Scripts/Camera2D.gd" id="1_t7d0q"]
+[ext_resource type="PackedScene" uid="uid://britc7oatw0ok" path="res://Scenes/Tilemap.tscn" id="2_qacxy"]
 [ext_resource type="PackedScene" uid="uid://bqat16e5w0nyl" path="res://Scenes/Operator.tscn" id="3_l8d6g"]
 [ext_resource type="PackedScene" uid="uid://cuigwtfuwq13q" path="res://Scenes/section.tscn" id="5_8rdun"]
 
 [node name="GameScene" type="Node2D"]
 script = ExtResource("1_cshjr")
+
+[node name="Node2D" parent="." instance=ExtResource("2_qacxy")]
+position = Vector2(362, 288)
+scale = Vector2(1.49501, 1.49501)
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -29,10 +34,11 @@ limit_top = 0
 script = ExtResource("1_t7d0q")
 
 [node name="Kiraz2" parent="." instance=ExtResource("3_l8d6g")]
-position = Vector2(480, 272)
+position = Vector2(603, 279)
 scale = Vector2(0.920898, 0.777734)
 
 [node name="Section" parent="." instance=ExtResource("5_8rdun")]
-position = Vector2(567, 237)
+position = Vector2(385, 244)
+scale = Vector2(0.610768, 1)
 
 [connection signal="area_selected" from="Camera2D" to="." method="_on_area_selected"]
