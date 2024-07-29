@@ -49,8 +49,12 @@ func snap_to_grid():
 	print("Local Position before snapping: ", local_pos)
 
 	# Calculate the nearest grid cell
-	var snapped_x = clamp(round(local_pos.x / grid_size) * grid_size, 0, (GRID_DIMENSIONS - 1) * grid_size)
-	var snapped_y = clamp(round(local_pos.y / grid_size) * grid_size, 0, (GRID_DIMENSIONS - 1) * grid_size)
+	var snapped_x = round(local_pos.x / grid_size) * grid_size
+	var snapped_y = round(local_pos.y / grid_size) * grid_size
+
+	# Ensure the snapped position is within the grid bounds
+	snapped_x = clamp(snapped_x, 0, (GRID_DIMENSIONS - 1) * grid_size)
+	snapped_y = clamp(snapped_y, 0, (GRID_DIMENSIONS - 1) * grid_size)
 	var snapped_local_pos = Vector2(snapped_x, snapped_y)
 	print("Snapped Local Position: ", snapped_local_pos)
 
@@ -79,7 +83,7 @@ func validate_position():
 	# Check for overlap with other ships
 	var self_rect = Rect2(global_position, Vector2(grid_size, grid_size))
 	for child in get_parent().get_children():
-		if child != self:
+		if child != self and child is Sprite2D:
 			var child_pos = child.global_position
 			var child_rect = Rect2(child_pos, Vector2(grid_size, grid_size))
 			if child_rect.intersects(self_rect):
