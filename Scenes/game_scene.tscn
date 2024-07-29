@@ -29,7 +29,7 @@ limit_top = 0
 script = ExtResource("1_t7d0q")
 
 [node name="Kiraz2" parent="." instance=ExtResource("3_l8d6g")]
-position = Vector2(445, 274)
+position = Vector2(480, 272)
 scale = Vector2(0.920898, 0.777734)
 
 [node name="Section" parent="." instance=ExtResource("5_8rdun")]
