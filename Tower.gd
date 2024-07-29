@@ -28,15 +28,16 @@ func _input(event):
 				if Rect2(Vector2.ZERO, Vector2(grid_size, grid_size)).has_point(mouse_local_pos):
 					is_dragging = true
 					drag_offset = global_position - event.global_position
+					print("Started dragging. Drag offset: ", drag_offset)
+					print("Initial global position: ", global_position)
 			else:
 				is_dragging = false
 				snap_to_grid()
-		elif event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
-			rotation_degrees += 90
 
 func _process(_delta):
 	if is_dragging:
 		global_position = get_global_mouse_position() + drag_offset
+		print("Dragging. Global position: ", global_position)
 
 func snap_to_grid():
 	if grid_container == null:
@@ -48,8 +49,8 @@ func snap_to_grid():
 	print("Local Position before snapping: ", local_pos)
 
 	# Calculate the nearest grid cell
-	var snapped_x = round(local_pos.x / grid_size) * grid_size
-	var snapped_y = round(local_pos.y / grid_size) * grid_size
+	var snapped_x = clamp(round(local_pos.x / grid_size) * grid_size, 0, (GRID_DIMENSIONS - 1) * grid_size)
+	var snapped_y = clamp(round(local_pos.y / grid_size) * grid_size, 0, (GRID_DIMENSIONS - 1) * grid_size)
 	var snapped_local_pos = Vector2(snapped_x, snapped_y)
 	print("Snapped Local Position: ", snapped_local_pos)
 
@@ -70,6 +71,7 @@ func validate_position():
 
 	# Ensure the ship is within grid bounds
 	if grid_x < 0 or grid_y < 0 or grid_x >= GRID_DIMENSIONS or grid_y >= GRID_DIMENSIONS:
+		print("Out of grid bounds, reverting to initial position")
 		# Reset to initial position if out of bounds
 		global_position = initial_pos
 		return
@@ -81,6 +83,7 @@ func validate_position():
 			var child_pos = child.global_position
 			var child_rect = Rect2(child_pos, Vector2(grid_size, grid_size))
 			if child_rect.intersects(self_rect):
+				print("Collision detected, reverting to initial position")
 				global_position = initial_pos
 				return
 
