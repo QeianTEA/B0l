@@ -11,7 +11,11 @@ config_version=5
 [application]
 
 config/name="B0L"
+<<<<<<< HEAD
 run/main_scene="res://Scenes/game_scene.tscn"
+=======
+run/main_scene="res://Main.tscn"
+>>>>>>> origin/main
 config/features=PackedStringArray("4.2", "GL Compatibility")
 config/icon="res://Assets/Misc/icon.svg"
 
