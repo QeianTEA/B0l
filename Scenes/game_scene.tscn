@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://hlxrly7om340" path="res://Temp/Gomi4.png" id="1_mjxse"]
 [ext_resource type="Script" path="res://Scripts/Camera2D.gd" id="1_t7d0q"]
 [ext_resource type="PackedScene" uid="uid://britc7oatw0ok" path="res://Scenes/Tilemap.tscn" id="2_qacxy"]
-[ext_resource type="PackedScene" uid="uid://bqat16e5w0nyl" path="res://Scenes/Operator.tscn" id="3_l8d6g"]
+[ext_resource type="PackedScene" uid="uid://bqat16e5w0nyl" path="res://Scenes/operator.tscn" id="3_l8d6g"]
 [ext_resource type="PackedScene" uid="uid://cuigwtfuwq13q" path="res://Scenes/section.tscn" id="5_8rdun"]
 
 [node name="GameScene" type="Node2D"]
