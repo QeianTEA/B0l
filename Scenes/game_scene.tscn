@@ -10,9 +10,9 @@
 [node name="GameScene" type="Node2D"]
 script = ExtResource("1_cshjr")
 
-[node name="Node2D" parent="." instance=ExtResource("2_qacxy")]
-position = Vector2(362, 288)
-scale = Vector2(1.49501, 1.49501)
+[node name="TileMoa" parent="." instance=ExtResource("2_qacxy")]
+z_index = -2
+position = Vector2(360, 290)
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -34,11 +34,20 @@ limit_top = 0
 script = ExtResource("1_t7d0q")
 
 [node name="Kiraz2" parent="." instance=ExtResource("3_l8d6g")]
-position = Vector2(603, 279)
+position = Vector2(360, 288)
 scale = Vector2(0.920898, 0.777734)
 
-[node name="Section" parent="." instance=ExtResource("5_8rdun")]
-position = Vector2(385, 244)
-scale = Vector2(0.610768, 1)
+[node name="Sections" type="Node" parent="."]
+
+[node name="Section" parent="Sections" instance=ExtResource("5_8rdun")]
+z_index = -1
+position = Vector2(424, 226)
+
+[node name="Section2" parent="Sections" instance=ExtResource("5_8rdun")]
+z_index = -1
+position = Vector2(312, 226)
+
+[node name="Section3" parent="Sections" instance=ExtResource("5_8rdun")]
+position = Vector2(200, 226)
 
 [connection signal="area_selected" from="Camera2D" to="." method="_on_area_selected"]
