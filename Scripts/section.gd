@@ -2,9 +2,9 @@ extends Area2D
 
 @export var MaxOperators = 2
 
-@onready var operatorNumber = 0
-@onready var enemyPresent = false
-@onready var damaged = true
+@export var operatorNumber = 0
+@export var enemyPresent = false
+@export var damaged = true
 
 
 
