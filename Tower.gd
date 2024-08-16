@@ -29,7 +29,7 @@ func _input(event):
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if event.pressed:
 				var mouse_local_pos = to_local(event.position)
-				if Rect2(Vector2.ZERO, Vector2(tower_width * grid_size, tower_height * grid_size)).has_point(mouse_local_pos):
+				if Rect2(Vector2(-64 * tower_width,-64 * tower_height), Vector2(tower_width * grid_size, tower_height * grid_size)).has_point(mouse_local_pos):
 					is_dragging = true
 					drag_offset = global_position - event.global_position
 					print("Started dragging. Drag offset: ", drag_offset)
@@ -105,11 +105,11 @@ func validate_position():
 		return
 
 	# Check for overlap with other towers
-	var self_rect = Rect2(global_position, Vector2(tower_width * grid_size, tower_height * grid_size))
+	var self_rect = Rect2(global_position, Vector2(tower_width * grid_size - offset_x, tower_height * grid_size - offset_y))
 	for child in get_parent().get_children():
 		if child != self and child is Sprite2D:
 			var child_pos = child.global_position
-			var child_rect = Rect2(child_pos, Vector2(child.tower_width * grid_size, child.tower_height * grid_size))
+			var child_rect = Rect2(child_pos, Vector2(child.tower_width * grid_size - child.offset_x, child.tower_height * grid_size - child.offset_y))
 			if child_rect.intersects(self_rect):
 				print("Collision detected, reverting to initial position")
 				global_position = initial_pos
