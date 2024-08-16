@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://d0oj1jfu8qsfq"]
-
-[ext_resource type="Script" path="res://Tower.gd" id="2_3626n"]
-[ext_resource type="Texture2D" uid="uid://bx55ng4623e3t" path="res://icon2.svg" id="3_dx0d4"]
-
-[node name="Sprite2D" type="Sprite2D"]
-texture = ExtResource("3_dx0d4")
-script = ExtResource("2_3626n")

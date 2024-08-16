@@ -1,11 +1,14 @@
 extends GridContainer
 
-const GRID_SIZE = 3
 const CELL_SIZE = 128
 
+# Exported properties to set grid dimensions from the editor
+@export var grid_columns = 3
+@export var grid_rows = 3
+
 func _ready():
-	for y in range(GRID_SIZE):
-		for x in range(GRID_SIZE):
+	for y in range(grid_rows):
+		for x in range(grid_columns):
 			var cell = create_cell(x, y)
 			add_child(cell)
 
