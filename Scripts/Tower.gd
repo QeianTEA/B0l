@@ -3,7 +3,7 @@ extends Sprite2D
 var is_dragging = false
 var drag_offset = Vector2()
 var grid_size = 128  # Size of each cell in the grid (same as the texture size)
-var initial_pos = Vector2()
+@export var initial_pos = Vector2()
 
 # Exported properties to set tower dimensions from the editor
 @export var tower_width = 1  # Width of the tower in grid cells
@@ -15,7 +15,8 @@ var initial_pos = Vector2()
 var grid_container: GridContainer = null
 
 func _ready():
-	initial_pos = position
+	position = initial_pos
+	
 	if grid_container == null:
 		print("Grid container is not set.")
 
@@ -50,6 +51,7 @@ func snap_to_grid():
 
 	# Convert global position to local position relative to the grid container
 	var local_pos = global_position - grid_container.global_position
+	# var local_pos = initial_pos
 	print("Local Position before snapping: ", local_pos)
 
 	# Calculate the nearest grid cell
@@ -79,17 +81,17 @@ func snap_to_grid():
 	global_position = grid_container.global_position + snapped_local_pos
 	print("Global Position after snapping: ", global_position)
 
-	validate_position()
+	validate_position(local_pos)
 
 
 
 
-func validate_position():
+func validate_position(local_pos):
 	if grid_container == null:
 		return
 
 	# Convert global position to local position relative to the grid container
-	var local_pos = global_position - grid_container.global_position
+	#var local_pos = global_position - grid_container.global_position
 	var grid_x = round(local_pos.x / grid_size)
 	var grid_y = round(local_pos.y / grid_size)
 
@@ -102,6 +104,8 @@ func validate_position():
 		print("Out of grid bounds, reverting to initial position")
 		# Reset to initial position if out of bounds
 		global_position = initial_pos
+		#position = initial_pos
+		#local_pos = initial_pos
 		return
 
 	# Check for overlap with other towers
@@ -113,6 +117,8 @@ func validate_position():
 			if child_rect.intersects(self_rect):
 				print("Collision detected, reverting to initial position")
 				global_position = initial_pos
+				#position = initial_pos
+				#local_pos = initial_pos
 				return
 
 	# Update initial position to new snapped position

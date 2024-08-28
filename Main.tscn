@@ -1,6 +1,21 @@
 [gd_scene load_steps=2 format=3 uid="uid://b6hn4nr10acel"]
 
-[ext_resource type="Script" path="res://Main.gd" id="1_oh1ee"]
+[ext_resource type="Script" path="res://Scripts/Main.gd" id="1_oh1ee"]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_oh1ee")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Panel" type="Panel" parent="Control"]
+modulate = Color(0.664872, 0.284763, 0.227471, 1)
+self_modulate = Color(0.761464, 0.233734, 0.229747, 1)
+clip_contents = true
+layout_mode = 0
+offset_left = 600.0
+offset_right = 1200.0
+offset_bottom = 700.0

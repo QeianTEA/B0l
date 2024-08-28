@@ -6,3 +6,4 @@
 [node name="Sprite2D" type="Sprite2D"]
 texture = ExtResource("1_1j3eh")
 script = ExtResource("2_a87cs")
+initial_pos = Vector2(800, 192)
