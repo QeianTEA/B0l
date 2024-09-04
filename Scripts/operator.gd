@@ -3,6 +3,7 @@ extends CharacterBody2D
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 @export var selected = false
+var moving = false
 @onready var anim = $AnimatedSprite2D
 
 @onready var box = $Selected
@@ -11,6 +12,9 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @export var MaxSpeed = 150
 var health
 var speed
+
+var click_position = Vector2()
+var section_position = Vector2()
 
 var walkDirection = 1
 
@@ -31,6 +35,7 @@ func _ready():
 	set_selected(selected)
 	box.visible = false
 	health = MaxHp;
+	click_position = position
 	State(1)
 
 func set_selected(value):
@@ -45,17 +50,20 @@ func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y += gravity * delta
 	
-	
-	if selected:
-		pass
-
-	if position:  # ??? what to do
+	if moving:       ##its gonna change just temp
+		click_position = get_global_mouse_position()
+		section_position = (click_position - position).normalized()
+		velocity = section_position * speed
 		move_and_slide()
-	else:
-		#anim.stop()
-		pass
+
+func MoveOrder():      ##needs to be signaled from the section right click
+	if selected:
+		if Input.is_action_just_pressed("RightClick"):
+			moving = true
+
 
 func SectionEntered():    
+	moving = false
 	if attack:   #direkt saldır
 		#Attack()
 		State(3)

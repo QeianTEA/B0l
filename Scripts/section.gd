@@ -7,7 +7,7 @@ extends Area2D
 @export var damaged = true
 
 
-
+## Area2D mouse clicker script and signal the operator thanksyo
 
 func _on_body_entered(body):
 	if body.is_in_group("Operators"):
