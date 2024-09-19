@@ -37,17 +37,28 @@ script = ExtResource("1_t7d0q")
 position = Vector2(360, 288)
 scale = Vector2(0.920898, 0.777734)
 
+[node name="Kiraz3" parent="." instance=ExtResource("3_l8d6g")]
+position = Vector2(254, 288)
+scale = Vector2(0.920898, 0.777734)
+
 [node name="Sections" type="Node" parent="."]
 
 [node name="Section" parent="Sections" instance=ExtResource("5_8rdun")]
 z_index = -1
-position = Vector2(424, 226)
+position = Vector2(432, 226)
+operatorNumber = 2
+damaged = false
 
 [node name="Section2" parent="Sections" instance=ExtResource("5_8rdun")]
 z_index = -1
-position = Vector2(312, 226)
+position = Vector2(320, 226)
+operatorNumber = 2
+damaged = false
 
 [node name="Section3" parent="Sections" instance=ExtResource("5_8rdun")]
-position = Vector2(200, 226)
+position = Vector2(208, 226)
+operatorNumber = 2
+damaged = false
 
 [connection signal="area_selected" from="Camera2D" to="." method="_on_area_selected"]
+[connection signal="walkOrder" from="Sections/Section" to="Kiraz2" method="_on_section_walk_order"]
