@@ -17,9 +17,11 @@ var click_position = Vector2()
 var section_position = Vector2()
 
 var walkDirection = 1
+var walkBobble = 5            #USE THIS BOING BOING MOVING YES
 
 var section_left = null
 var section_right = null
+var entered = false
 
 var attack = false    #FIREEE!!!
 var repair = false    #Fixing the equipment
@@ -51,27 +53,19 @@ func _physics_process(delta):
 		velocity.y += gravity * delta
 	
 	if moving:       ##its gonna change just temp
-		click_position = get_global_mouse_position()
-		section_position = (click_position - position).normalized()
 		velocity = section_position * speed
 		move_and_slide()
 
-func MoveOrder():      ##needs to be signaled from the section right click
-	if selected:
-		if Input.is_action_just_pressed("RightClick"):
-			moving = true
-
-
 func SectionEntered():    
-	moving = false
 	if attack:   #direkt saldır
+		moving = false
 		#Attack()
 		State(3)
 	elif repair: #Sectionun duvarlarına çarpmasın bundan sonrası için !!!!!!!!!!!!!!!!!!!!!!!!1
 		#Repair()
 		State(4)
 	elif full:
-		#Idle walk()
+		Idle()
 		State(2)
 	else:
 		#CheckGun()
@@ -85,7 +79,6 @@ func State(nunmber):
 			speed = MaxSpeed/2
 		2: #moving / jumping
 			anim.play("walk")
-			walking = true
 			speed = MaxSpeed
 			print("walking")
 		3: #attacking
@@ -98,3 +91,17 @@ func State(nunmber):
 			anim.play("check")
 			checking = true
 			print("check")
+
+
+func _on_section_walk_order():
+	if selected:
+		if Input.is_action_just_pressed("RightClick"):
+			idle = false
+			full = false
+			attack = false
+			checking = false
+			repair = false
+			moving = true
+
+func Idle():
+	pass

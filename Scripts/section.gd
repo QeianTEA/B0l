@@ -6,6 +6,10 @@ extends Area2D
 @export var enemyPresent = false
 @export var damaged = true
 
+@onready var marker_2d = $Marker2D
+@onready var marker_2d_2 = $Marker2D2
+
+signal walkOrder
 
 ## Area2D mouse clicker script and signal the operator thanksyo
 
@@ -18,10 +22,12 @@ func _on_body_entered(body):
 			body.attack = true
 		elif  damaged:
 			body.repair = true
-		elif operatorNumber <= MaxOperators:
+		elif operatorNumber >= MaxOperators:
 			body.full = true
 		else:
 			pass
+		
+		print(operatorNumber)
 		
 		body.SectionEntered()
 
@@ -34,3 +40,10 @@ func _on_body_exited(body):
 		body.full = false
 		body.repair = false
 		body.attack = false
+
+
+func _on_input_event(viewport, event, shape_idx):
+	if event is InputEventMouseButton:
+		if event.button_index == 2 and event.pressed:
+			emit_signal("walkOrder")
+		#print(event)

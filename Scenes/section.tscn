@@ -9,6 +9,7 @@
 size = Vector2(0.208333, 20)
 
 [node name="Section" type="Area2D"]
+scale = Vector2(0.84, 1)
 script = ExtResource("1_gjnqx")
 
 [node name="CollisionShape 0_8" type="CollisionShape2D" parent="."]
@@ -17,7 +18,7 @@ scale = Vector2(4.8, 4.8)
 shape = SubResource("RectangleShape2D_tdhg5")
 
 [node name="WallLeft" type="Area2D" parent="."]
-position = Vector2(48, 48)
+position = Vector2(39.2857, 48)
 scale = Vector2(4.8, 4.8)
 script = ExtResource("2_hd8i2")
 
@@ -26,7 +27,7 @@ position = Vector2(-9.89583, 0)
 shape = SubResource("RectangleShape2D_of75k")
 
 [node name="WallRight" type="Area2D" parent="."]
-position = Vector2(48, 48)
+position = Vector2(55.9524, 48)
 scale = Vector2(4.8, 4.8)
 script = ExtResource("2_hd8i2")
 
@@ -34,7 +35,14 @@ script = ExtResource("2_hd8i2")
 position = Vector2(9.89583, 0)
 shape = SubResource("RectangleShape2D_of75k")
 
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(14.2857, 88)
+
+[node name="Marker2D2" type="Marker2D" parent="."]
+position = Vector2(78.5714, 88)
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="input_event" from="." to="." method="_on_input_event"]
 [connection signal="body_entered" from="WallLeft" to="WallLeft" method="_on_body_entered"]
 [connection signal="body_entered" from="WallRight" to="WallRight" method="_on_body_entered"]
