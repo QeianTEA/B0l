@@ -17,34 +17,40 @@ func _ready():
 func _physics_process(delta):
 	if target != null:
 		var angle_to_target: float = global_position.direction_to(target.global_position).angle()
+		var distance_to_target = global_position.distance_to(target.global_position)
+
+		rayCast.target_position = Vector2(distance_to_target, 0).rotated(angle_to_target)
 		rayCast.global_rotation = angle_to_target
+
+		print(rayCast.is_colliding(), rayCast.get_collider())
 		
 		if rayCast.is_colliding() and rayCast.get_collider().is_in_group("Enemy"):
 			gunSprite.rotation = angle_to_target
 			if reloadTimer.time_left == 0:
 				shoot()
-
-
+				
 func shoot():
 	print("PEW")
 	rayCast.enabled = false
 	
 	if BULLET:
 		var bullet: Node2D = BULLET.instantiate()
-		get_tree().root.current_scene.add_child(bullet)
+		# Use get_tree().root to add the bullet to the root node
+		get_tree().root.add_child(bullet)
 		bullet.global_position = global_position
 		bullet.global_rotation = rayCast.global_rotation
 	
 	reloadTimer.start()
 
 
+
 func find_target():
 	var new_target: Node2D = null
 	
 	if get_tree().has_group("Enemy"):
-		var players = get_tree().get_nodes_in_group("Enemy")
-		if players.size() > 0:
-			new_target = players[0] as Node2D
+		var enemies = get_tree().get_nodes_in_group("Enemy")
+		if enemies.size() > 0:
+			new_target = enemies[0] as Node2D
 	
 	return new_target
 

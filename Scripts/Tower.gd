@@ -2,7 +2,7 @@ extends Sprite2D
 
 var is_dragging = false
 var drag_offset = Vector2()
-var grid_size = 128  # Size of each cell in the grid (same as the texture size)
+var grid_size = 128  # Size of each cell in the grid (should be same as the texture size)
 @export var initial_pos = Vector2()
 
 # Exported properties to set tower dimensions from the editor
@@ -113,6 +113,7 @@ func validate_position(local_pos):
 	for child in get_parent().get_children():
 		if child != self and child is Sprite2D:
 			var child_pos = child.global_position
+			# We can play around with these values the make the collision detection more forgiving
 			var child_rect = Rect2(child_pos, Vector2(child.tower_width * grid_size - child.offset_x, child.tower_height * grid_size - child.offset_y))
 			if child_rect.intersects(self_rect):
 				print("Collision detected, reverting to initial position")
