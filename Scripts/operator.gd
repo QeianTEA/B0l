@@ -9,7 +9,7 @@ var moving = false
 @onready var box = $Selected
 
 @export var MaxHp = 100
-@export var MaxSpeed = 150
+@export var MaxSpeed = 10
 var health
 var speed
 
@@ -52,11 +52,21 @@ func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y += gravity * delta
 	
-	if moving:       ##its gonna change just temp
-		velocity = section_position * speed
+	if velocity < Vector2(0,0):
+		anim.flip_h = true
+	else :
+		anim.flip_h = false
+	
+	if moving:
+		var direction = (Vector2(section_position.x + 40, 0) - Vector2(position.x, 0)).normalized()
+		velocity = direction * speed
+		if Vector2(position.x, 0).distance_to(Vector2(section_position.x + 40, 0)) < 2:
+			moving = false
+			SectionEntered()
 		move_and_slide()
 
-func SectionEntered():    
+
+func SectionEntered():
 	if attack:   #direkt saldır
 		moving = false
 		#Attack()
@@ -66,7 +76,7 @@ func SectionEntered():
 		State(4)
 	elif full:
 		Idle()
-		State(2)
+		State(1)
 	else:
 		#CheckGun()
 		State(5)
@@ -77,6 +87,7 @@ func State(nunmber):
 			anim.play("idle")
 			idle = true
 			speed = MaxSpeed/2
+			print("idle")
 		2: #moving / jumping
 			anim.play("walk")
 			speed = MaxSpeed
@@ -95,13 +106,14 @@ func State(nunmber):
 
 func _on_section_walk_order():
 	if selected:
-		if Input.is_action_just_pressed("RightClick"):
-			idle = false
-			full = false
-			attack = false
-			checking = false
-			repair = false
-			moving = true
+		idle = false
+		full = false
+		attack = false
+		checking = false
+		repair = false
+		moving = true
+		State(2)
+		print("orderRecieved")
 
 func Idle():
 	pass

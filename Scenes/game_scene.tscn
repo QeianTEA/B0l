@@ -61,4 +61,3 @@ operatorNumber = 2
 damaged = false
 
 [connection signal="area_selected" from="Camera2D" to="." method="_on_area_selected"]
-[connection signal="walkOrder" from="Sections/Section" to="Kiraz2" method="_on_section_walk_order"]

@@ -61,7 +61,9 @@ animations = [{
 size = Vector2(1422.51, 2712.69)
 
 [node name="Operator" type="CharacterBody2D" groups=["Operators"]]
+collision_layer = 2
 script = ExtResource("1_kug7e")
+MaxSpeed = 100
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 visible = false
