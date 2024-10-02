@@ -1,22 +1,17 @@
 extends Area2D
 
-const RIGHT = Vector2.RIGHT
-@export var SPEED: int = 200
+@export var bullet_speed: float = 400.0 
+var direction: Vector2 = Vector2() 
+
+func _ready():
+	# Connect the body_entered signal to detect collision with enemies
+	connect("body_entered", Callable(self, "_on_body_entered"))
 
 
-func _physics_process(delta):
-	var movement = RIGHT.rotated(rotation) * SPEED * delta
-	global_position += movement
+func _process(delta): # Move the bullet
+	position += direction * bullet_speed * delta
 
-
-func destroy():
-	queue_free()
-
-
-func _on_VisibilityNotifier2D_screen_exited():
-	queue_free()
-
-
-func _on_Bullet_body_entered(body: Node):
-	if body.is_in_group("Player"):
-		destroy()
+func _on_body_entered(body):
+	if body.is_in_group("Enemy"):
+		# We need to implement logic when the bullet hits an enemy; destroy enemy, reduce health etc.
+		queue_free()  # Destroy the bullet after it hits
