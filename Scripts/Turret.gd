@@ -1,10 +1,10 @@
 extends Node2D
 
 @export var BULLET: PackedScene = null  # Bullet scene
-@export var bullet_speed: float = 400.0 
-@export var reload_time: float = 1.5  # Time it takes to reload after each shot
+@export var bullet_speed: float = 600.0 
+@export var reload_time: float = 0.1  # Time it takes to reload after each shot
 @export var reload_ammo_time: float = 3.0  # Time to reload the entire ammo once out
-@export var max_ammo: int = 10  
+@export var max_ammo: int = 60
 @export var max_range: float = 650.0 
 
 var target: Node2D = null 
@@ -39,7 +39,7 @@ func _physics_process(_delta):
 		rayCast.target_position = Vector2(distance_to_target, 0).rotated(angle_to_target)
 		rayCast.global_rotation = angle_to_target
 
-		if rayCast.is_colliding() and rayCast.get_collider().is_in_group("Enemy"):
+		if rayCast.get_collider() and rayCast.is_colliding() and rayCast.get_collider().is_in_group("Enemy"):
 			gunSprite.rotation = angle_to_target
 			if reloadTimer.time_left == 0 and current_ammo > 0:
 				shoot()
