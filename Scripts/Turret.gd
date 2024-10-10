@@ -43,6 +43,8 @@ func _physics_process(_delta):
 			gunSprite.rotation = angle_to_target
 			if reloadTimer.time_left == 0 and current_ammo > 0:
 				shoot()
+@export var miss_chance: float = 0.1  # 10% chance to miss by default
+@export var miss_angle_deviation: float = PI / 12  # Deviation of 15 degrees (adjust as needed)
 
 func shoot():
 	print("PEW! Shooting bullet.")
@@ -52,10 +54,21 @@ func shoot():
 		var bullet: Area2D = BULLET.instantiate()
 		get_tree().root.add_child(bullet)
 		bullet.global_position = global_position
-		bullet.global_rotation = rayCast.global_rotation
-		
+
+		# Calculate the bullet's direction
 		var bullet_direction = Vector2(1, 0).rotated(rayCast.global_rotation)
-		bullet.direction = bullet_direction  # Pass the direction to the bullet script
+
+		# Implement chance to miss
+		var rand = randi() % 100 / 100.0
+		var is_miss = false
+		if rand < miss_chance: # Random chance for turret to aim a few degrees away from the enemy
+			print("Missed!")
+			var miss_offset = randf_range(-miss_angle_deviation, miss_angle_deviation)
+			bullet_direction = bullet_direction.rotated(miss_offset)  # Adjust direction slightly
+			is_miss = true;
+		bullet.set_miss(is_miss)
+		bullet.global_rotation = bullet_direction.angle()
+		bullet.direction = bullet_direction  # Pass the adjusted or normal direction to the bullet script
 
 	reloadTimer.start()
 	current_ammo -= 1
@@ -63,6 +76,8 @@ func shoot():
 
 	if current_ammo <= 0:
 		start_reloading()
+
+
 
 
 
