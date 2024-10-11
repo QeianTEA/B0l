@@ -7,6 +7,10 @@ extends Node2D
 @export var max_ammo: int = 60
 @export var max_range: float = 650.0 
 
+@export var explosion_radius: float = 100.0
+@export var explode_in_air: bool = false
+@export var fuse_time: float = 1.5
+
 var target: Node2D = null 
 var current_ammo: int
 var is_reloading: bool = false  
@@ -54,7 +58,9 @@ func shoot():
 		var bullet: Area2D = BULLET.instantiate()
 		get_tree().root.add_child(bullet)
 		bullet.global_position = global_position
-
+		bullet.explosion_radius = explosion_radius
+		bullet.explode_in_air = explode_in_air
+		bullet.fuse_time = fuse_time
 		# Calculate the bullet's direction
 		var bullet_direction = Vector2(1, 0).rotated(rayCast.global_rotation)
 
@@ -68,8 +74,10 @@ func shoot():
 			is_miss = true;
 		bullet.set_miss(is_miss)
 		bullet.global_rotation = bullet_direction.angle()
-		bullet.direction = bullet_direction  # Pass the adjusted or normal direction to the bullet script
-
+		bullet.direction = bullet_direction  
+		
+		bullet.start_fuse_timer()
+		
 	reloadTimer.start()
 	current_ammo -= 1
 	print("Ammo left: ", current_ammo)

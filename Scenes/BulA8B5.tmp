@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://dkiiwput1f5c1"]
+
+[ext_resource type="Script" path="res://Scripts/Bullet.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://dwam5e2b65giy" path="res://Temp/Bullet.png" id="2_7v032"]
+
+[sub_resource type="CircleShape2D" id="1"]
+radius = 95.7549
+
+[node name="Bullet" type="Area2D" groups=["Bullet"]]
+script = ExtResource("1")
+bullet_speed = null
+explosion_radius = null
+explode_in_air = null
+fuse_time = null
+
+[node name="Sprite" type="Sprite2D" parent="." groups=["Bullet"]]
+scale = Vector2(12.5934, 11.5569)
+texture = ExtResource("2_7v032")
+hframes = 2
+frame = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["Bullet"]]
+scale = Vector2(1.12049, 0.358291)
+shape = SubResource("1")
+
+[node name="VisibilityNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="body_entered" from="." to="." method="_on_Bullet_body_entered"]
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

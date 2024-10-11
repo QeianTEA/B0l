@@ -70,3 +70,8 @@ position = Vector2(1016, 241)
 
 [node name="Turret" parent="." instance=ExtResource("2_ya5u2")]
 position = Vector2(312, 382)
+reload_time = 1.0
+explosion_radius = 300.0
+explode_in_air = true
+fuse_time = 1.0
+miss_chance = 0.0
