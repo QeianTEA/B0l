@@ -41,13 +41,20 @@ scale = Vector2(0.920898, 0.777734)
 position = Vector2(254, 288)
 scale = Vector2(0.920898, 0.777734)
 
+[node name="Kiraz4" parent="." instance=ExtResource("3_l8d6g")]
+position = Vector2(281, 288)
+scale = Vector2(0.920898, 0.777734)
+
+[node name="Kiraz5" parent="." instance=ExtResource("3_l8d6g")]
+position = Vector2(385, 288)
+scale = Vector2(0.920898, 0.777734)
+
 [node name="Sections" type="Node" parent="."]
 
 [node name="Section" parent="Sections" instance=ExtResource("5_8rdun")]
 z_index = -1
 position = Vector2(432, 226)
 MaxOperators = 1
-damaged = false
 
 [node name="Section2" parent="Sections" instance=ExtResource("5_8rdun")]
 z_index = -1

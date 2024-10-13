@@ -15,16 +15,19 @@ var speed
 
 var click_position = Vector2()
 var section_position = Vector2()
+var operatorNum = 0
 
 var walkDirection = 1
 var walkBobble = 5            #USE THIS BOING BOING MOVING YES
 
+var SectionObj = null
 var section_left = null
 var section_right = null
 var entered = false
 
 var attack = false    #FIREEE!!!
 var repair = false    #Fixing the equipment
+var repairMove = false
 var full = false      #Section is full
 var walking = false   #Moving horizontal
 var jump = false      #Moving vertical
@@ -68,6 +71,32 @@ func _physics_process(delta):
 	if idle:
 		velocity = walkDirection * speed
 		move_and_slide()
+	
+	if repairMove:
+		if operatorNum > 3:
+			repairMove = false
+			full = true
+		else:
+			match(operatorNum):
+				1:
+					var direction = (Vector2(section_position.x, 0) - Vector2(position.x, 0)).normalized()
+					velocity = direction * speed
+					if Vector2(position.x, 0).distance_to(Vector2(section_position.x - 20, 0)) < 2:
+						repairMove = false
+					move_and_slide()
+				2:
+					var direction = (Vector2(section_position.x + 40, 0) - Vector2(position.x, 0)).normalized()
+					velocity = direction * speed
+					if Vector2(position.x, 0).distance_to(Vector2(section_position.x + 40, 0)) < 2:
+						repairMove = false
+					move_and_slide()
+				3:
+					var direction = (Vector2(section_position.x + 80, 0) - Vector2(position.x, 0)).normalized()
+					velocity = direction * speed
+					if Vector2(position.x, 0).distance_to(Vector2(section_position.x + 100, 0)) < 2:
+						repairMove = false
+					move_and_slide()
+
 
 
 func SectionEntered():
@@ -75,7 +104,7 @@ func SectionEntered():
 		moving = false
 		#Attack()
 		State(3)
-	elif repair: #Sectionun duvarlarına çarpmasın bundan sonrası için !!!!!!!!!!!!!!!!!!!!!!!!1
+	elif repair:  #ortaya gel öyle karar ver
 		#Repair()
 		State(4)
 	elif full:
@@ -101,6 +130,7 @@ func State(nunmber):
 			print("idle")
 		2: #moving / jumping
 			anim.play("walk")
+			z_index = 2
 			speed = MaxSpeed
 			print("walking")
 		3: #attacking
@@ -108,10 +138,13 @@ func State(nunmber):
 			print("attacking")
 		4: #repearing
 			anim.play("repair")
+			repairMove = true
+			z_index = 1
 			print("repairing")
 		5: #checking gun
 			anim.play("check")
 			checking = true
+			z_index = 1
 			print("check")
 
 
@@ -122,6 +155,9 @@ func _on_section_walk_order():
 		attack = false
 		checking = false
 		repair = false
+		repairMove = false
+		SectionObj = null
 		moving = true
 		State(2)
-		print("orderRecieved")
+	else:
+		SectionEntered()

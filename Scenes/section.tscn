@@ -42,12 +42,6 @@ script = ExtResource("2_hd8i2")
 position = Vector2(9.89583, 0)
 shape = SubResource("RectangleShape2D_of75k")
 
-[node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(14.2857, 88)
-
-[node name="Marker2D2" type="Marker2D" parent="."]
-position = Vector2(78.5714, 88)
-
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(48, 48)
 collision_mask = 7

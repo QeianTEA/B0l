@@ -6,8 +6,7 @@ extends Area2D
 @export var enemyPresent = false
 @export var damaged = true
 
-@onready var marker_2d = $Marker2D
-@onready var marker_2d_2 = $Marker2D2
+@onready var section = $"."
 
 
 
@@ -16,6 +15,8 @@ extends Area2D
 func _on_body_entered(body):
 	if body.is_in_group("Operators"):
 			operatorNumber += 1
+			body.operatorNum = operatorNumber
+			body.SectionObj = section
 			if enemyPresent:
 				body.attack = true
 				body.SectionEntered()
@@ -37,6 +38,9 @@ func _on_body_exited(body):
 		body.full = false
 		body.repair = false
 		body.attack = false
+		body.idle = false
+		body.checking = false
+		body.repairMove = false
 
 
 func _on_input_event(viewport, event, shape_idx):
