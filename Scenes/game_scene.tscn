@@ -46,18 +46,18 @@ scale = Vector2(0.920898, 0.777734)
 [node name="Section" parent="Sections" instance=ExtResource("5_8rdun")]
 z_index = -1
 position = Vector2(432, 226)
-operatorNumber = 2
+MaxOperators = 1
 damaged = false
 
 [node name="Section2" parent="Sections" instance=ExtResource("5_8rdun")]
 z_index = -1
 position = Vector2(320, 226)
-operatorNumber = 2
+MaxOperators = 1
 damaged = false
 
 [node name="Section3" parent="Sections" instance=ExtResource("5_8rdun")]
 position = Vector2(208, 226)
-operatorNumber = 2
+MaxOperators = 1
 damaged = false
 
 [connection signal="area_selected" from="Camera2D" to="." method="_on_area_selected"]

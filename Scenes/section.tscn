@@ -20,21 +20,25 @@ position = Vector2(48, 48)
 scale = Vector2(4.8, 4.8)
 shape = SubResource("RectangleShape2D_tdhg5")
 
-[node name="WallLeft" type="Area2D" parent="."]
-position = Vector2(39.2857, 48)
-scale = Vector2(4.8, 4.8)
-script = ExtResource("2_hd8i2")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="WallLeft"]
-position = Vector2(-9.89583, 0)
-shape = SubResource("RectangleShape2D_of75k")
-
 [node name="WallRight" type="Area2D" parent="."]
 position = Vector2(55.9524, 48)
 scale = Vector2(4.8, 4.8)
+collision_layer = 2
+collision_mask = 7
 script = ExtResource("2_hd8i2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WallRight"]
+position = Vector2(9.89583, 0)
+shape = SubResource("RectangleShape2D_of75k")
+
+[node name="WallLeft" type="Area2D" parent="."]
+position = Vector2(-55.952, 48)
+scale = Vector2(4.8, 4.8)
+collision_layer = 2
+collision_mask = 7
+script = ExtResource("2_hd8i2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallLeft"]
 position = Vector2(9.89583, 0)
 shape = SubResource("RectangleShape2D_of75k")
 
@@ -55,6 +59,6 @@ shape = SubResource("RectangleShape2D_gryk8")
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
 [connection signal="input_event" from="." to="." method="_on_input_event"]
-[connection signal="body_entered" from="WallLeft" to="WallLeft" method="_on_body_entered"]
 [connection signal="body_entered" from="WallRight" to="WallRight" method="_on_body_entered"]
+[connection signal="body_entered" from="WallLeft" to="WallLeft" method="_on_body_entered"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered_middle"]

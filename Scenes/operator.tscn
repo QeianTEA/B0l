@@ -61,6 +61,7 @@ animations = [{
 size = Vector2(1422.51, 2712.69)
 
 [node name="Operator" type="CharacterBody2D" groups=["Operators"]]
+scale = Vector2(0.63725, 0.663847)
 collision_layer = 2
 script = ExtResource("1_kug7e")
 MaxSpeed = 100
@@ -77,8 +78,7 @@ animation = &"idle"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -1.00002)
-scale = Vector2(0.0302283, 0.0302283)
+scale = Vector2(0.0147345, 0.0291197)
 shape = SubResource("RectangleShape2D_nkenr")
 
 [node name="HealthBar2" type="Panel" parent="."]
@@ -87,6 +87,7 @@ offset_top = -64.0
 offset_right = 20.0
 offset_bottom = -28.0
 theme_override_styles/panel = ExtResource("3_tjxfm")
+metadata/_edit_use_anchors_ = true
 
 [node name="Selected" type="Panel" parent="."]
 offset_left = -20.0
@@ -94,3 +95,4 @@ offset_top = -50.0
 offset_right = 20.0
 offset_bottom = -42.0
 theme_override_styles/panel = ExtResource("4_ts5mu")
+metadata/_edit_use_anchors_ = true

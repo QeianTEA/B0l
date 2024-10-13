@@ -21,7 +21,7 @@ func _on_body_entered(body):
 				body.SectionEntered()
 			elif damaged:
 				body.repair = true
-			elif operatorNumber >= MaxOperators:
+			elif operatorNumber > MaxOperators:
 				body.full = true
 			else:
 				pass

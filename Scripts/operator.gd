@@ -54,7 +54,7 @@ func _physics_process(delta):
 	
 	if velocity < Vector2(0,0):
 		anim.flip_h = true
-	else :
+	else:
 		anim.flip_h = false
 	
 	if moving:
@@ -63,6 +63,10 @@ func _physics_process(delta):
 		if Vector2(position.x, 0).distance_to(Vector2(section_position.x + 40, 0)) < 2:
 			moving = false
 			SectionEntered()
+		move_and_slide()
+	
+	if idle:
+		velocity = walkDirection * speed
 		move_and_slide()
 
 
@@ -75,7 +79,7 @@ func SectionEntered():
 		#Repair()
 		State(4)
 	elif full:
-		Idle()
+		#Idle()
 		State(1)
 	else:
 		#CheckGun()
@@ -86,7 +90,14 @@ func State(nunmber):
 		1: #idle
 			anim.play("idle")
 			idle = true
-			speed = MaxSpeed/2
+			var chooser = randi_range(0, 5)
+			
+			if chooser > 2:
+				walkDirection = Vector2(1, 0)
+			else:
+				walkDirection = Vector2(-1, 0)
+				
+			speed = MaxSpeed/3
 			print("idle")
 		2: #moving / jumping
 			anim.play("walk")
@@ -114,6 +125,3 @@ func _on_section_walk_order():
 		moving = true
 		State(2)
 		print("orderRecieved")
-
-func Idle():
-	pass
