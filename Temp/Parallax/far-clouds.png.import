@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://rk0u8mt4vtas"
-path="res://.godot/imported/icon2.svg-72130b1822965a82303075846d8629f5.ctex"
+uid="uid://d2skupuix02d4"
+path="res://.godot/imported/far-clouds.png-7be9c62fdf03cab3d7087931e3c6da93.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://icon2.svg"
-dest_files=["res://.godot/imported/icon2.svg-72130b1822965a82303075846d8629f5.ctex"]
+source_file="res://Temp/Parallax/far-clouds.png"
+dest_files=["res://.godot/imported/far-clouds.png-7be9c62fdf03cab3d7087931e3c6da93.ctex"]
 
 [params]
 
@@ -32,6 +32,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false

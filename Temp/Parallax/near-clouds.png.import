@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dkgqjbtncjuns"
-path="res://.godot/imported/pixil-frame-0.png-ad73aed19b00fd55eeaf2db0cae8f8ff.ctex"
+uid="uid://lphn42alqhpe"
+path="res://.godot/imported/near-clouds.png-bafbe6c5fa7ce3ba2b68045725984b43.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://pixil-frame-0.png"
-dest_files=["res://.godot/imported/pixil-frame-0.png-ad73aed19b00fd55eeaf2db0cae8f8ff.ctex"]
+source_file="res://Temp/Parallax/near-clouds.png"
+dest_files=["res://.godot/imported/near-clouds.png-bafbe6c5fa7ce3ba2b68045725984b43.ctex"]
 
 [params]
 
