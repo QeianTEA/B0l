@@ -15,6 +15,19 @@ var bodiesInside = []
 func sitrep(): #situation report -> sitrep get it?
 	for e in bodiesInside.size():
 		bodiesInside[e].SectionEntered()
+		reset_brain(bodiesInside[e])
+		bodiesInside[e].moving = true
+		bodiesInside[e].State(2)
+		bodiesInside[e].section_position = position
+		if enemyPresent:
+			bodiesInside[e].attack = true
+			bodiesInside[e].SectionEntered()
+		elif damaged:
+			bodiesInside[e].repair = true
+		elif operatorNumber > MaxOperators:
+			bodiesInside[e].full = true
+		else:
+			pass
 
 func _on_body_entered(body):
 	if body.is_in_group("Operators"):
@@ -43,6 +56,12 @@ func _on_body_exited(body):
 	if body.is_in_group("Operators"):
 		operatorNumber -= 1
 		bodiesInside.erase(body)
+		reset_brain(body)
+		pass
+	
+	sitrep()
+
+func reset_brain(body):
 		body.full = false
 		body.repair = false
 		body.attack = false
@@ -50,10 +69,6 @@ func _on_body_exited(body):
 		body.checking = false
 		body.repairMove = false
 		body.SectionObj = null
-		pass
-	
-	sitrep()
-
 
 func _on_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton:
