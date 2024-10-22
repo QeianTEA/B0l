@@ -68,11 +68,11 @@ func _physics_process(delta):
 			SectionEntered()
 		move_and_slide()
 	
-	if idle:
+	if idle && !moving:
 		velocity = walkDirection * speed
 		move_and_slide()
 	
-	if repairMove:
+	if repairMove && !moving:
 		if operatorNum > 3:
 			repairMove = false
 			full = true
@@ -150,13 +150,6 @@ func State(nunmber):
 
 func _on_section_walk_order():
 	if selected:
-		idle = false
-		full = false
-		attack = false
-		checking = false
-		repair = false
-		repairMove = false
-		SectionObj = null
 		moving = true
 		State(2)
 	else:
