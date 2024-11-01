@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://dcihi45ivp7bm"]
+
+[ext_resource type="Texture2D" uid="uid://btdf1i5tuafcp" path="res://Temp/image_45.png" id="1_5ovl4"]
+
+[node name="Obstacle" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.391111, 0.408889)
+texture = ExtResource("1_5ovl4")

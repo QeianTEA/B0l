@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://b88oqgamkhty7"]
+[gd_scene load_steps=8 format=3 uid="uid://b88oqgamkhty7"]
 
 [ext_resource type="Texture2D" uid="uid://bctmoc8pe73ff" path="res://Temp/Parallax/sky.png" id="1_dfyv6"]
 [ext_resource type="Texture2D" uid="uid://bkfo03u4o8f2w" path="res://Temp/Parallax/mountains.png" id="2_7ecun"]
 [ext_resource type="Texture2D" uid="uid://craqmpfp7sn6x" path="res://Temp/Parallax/far-mountains.png" id="3_2yger"]
 [ext_resource type="Texture2D" uid="uid://mmfrosh1hkpk" path="res://Assets/tank.webp" id="5_cxjqj"]
 [ext_resource type="Script" path="res://Scenes/Tank.gd" id="6_0647k"]
+[ext_resource type="Script" path="res://Scenes/ObstacleSpawner.gd" id="6_wliin"]
+[ext_resource type="PackedScene" uid="uid://dcihi45ivp7bm" path="res://Scenes/Obstacle.tscn" id="7_7uhp5"]
 
 [node name="Parallax" type="Node2D"]
 
@@ -54,3 +56,9 @@ script = ExtResource("6_0647k")
 [node name="Camera2D" type="Camera2D" parent="Tank"]
 position = Vector2(124, 180)
 scale = Vector2(2, 2)
+
+[node name="ObstacleSpawner" type="Node2D" parent="."]
+script = ExtResource("6_wliin")
+obstacle_scene = ExtResource("7_7uhp5")
+spawn_position = Vector2(0, 0)
+spawn_offset = 0.0
