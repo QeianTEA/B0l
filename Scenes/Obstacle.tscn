@@ -5,6 +5,5 @@
 [node name="Obstacle" type="Node2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-z_index = 2
-scale = Vector2(0.095, 0.1)
+scale = Vector2(0.2, 0.2)
 texture = ExtResource("1_5ovl4")

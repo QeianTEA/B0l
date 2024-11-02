@@ -18,13 +18,14 @@ func _ready() -> void:
 	viewport_size = get_viewport().size
 
 func _process(delta: float) -> void:
+	#if obstacle:
 	timer -= delta
 	#if !obstacle && timer <= 0:
 	if  !obstacle && timer <= 0:
 		spawn_obstacle()
 		# timer = randf_range(min_spawn_interval, max_spawn_interval)
 		timer = 3
-	if obstacle && to_global(obstacle.position).x < (to_global(parent.position).x - viewport_size.x - obstacle_size.x):
+	if obstacle && obstacle.global_position.x < (parent.global_position.x - viewport_size.x/2 - obstacle_size.x):
 		obstacle.queue_free()
 		obstacle = null;
 		print_debug("Clean")
@@ -35,6 +36,6 @@ func	spawn_obstacle() -> void:
 		if obstacle_sprite and obstacle_sprite.texture:
 			obstacle_size = obstacle_sprite.texture.get_size() * obstacle_sprite.scale
 	# randf_range(50, get_viewport().size.y - 50)
-	obstacle.position = Vector2(to_global(parent.position).x + viewport_size.x/2 + spawn_offset + obstacle_size.x, spawn_position.y)  
+	obstacle.global_position = Vector2(parent.global_position.x + viewport_size.x/2 + spawn_offset + obstacle_size.x, spawn_position.y)  
 	add_child(obstacle)
 	print_debug("Spawned, %f", obstacle.position.x)
