@@ -12,7 +12,7 @@ script = ExtResource("1_cshjr")
 
 [node name="TileMoa" parent="." instance=ExtResource("2_qacxy")]
 z_index = -2
-position = Vector2(360, 290)
+position = Vector2(162, 136)
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -35,22 +35,23 @@ limit_top = 0
 script = ExtResource("1_t7d0q")
 
 [node name="Kiraz2" parent="." instance=ExtResource("3_l8d6g")]
-position = Vector2(360, 288)
+position = Vector2(162, 134)
 scale = Vector2(0.920898, 0.777734)
 
 [node name="Kiraz3" parent="." instance=ExtResource("3_l8d6g")]
-position = Vector2(254, 288)
+position = Vector2(56, 134)
 scale = Vector2(0.920898, 0.777734)
 
 [node name="Kiraz4" parent="." instance=ExtResource("3_l8d6g")]
-position = Vector2(281, 288)
+position = Vector2(83, 134)
 scale = Vector2(0.920898, 0.777734)
 
 [node name="Kiraz5" parent="." instance=ExtResource("3_l8d6g")]
-position = Vector2(385, 288)
+position = Vector2(187, 134)
 scale = Vector2(0.920898, 0.777734)
 
-[node name="Sections" type="Node" parent="."]
+[node name="Sections" type="Node2D" parent="."]
+position = Vector2(-198, -154)
 
 [node name="Section" parent="Sections" instance=ExtResource("5_8rdun")]
 z_index = -1
