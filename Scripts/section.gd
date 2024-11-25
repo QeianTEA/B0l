@@ -5,31 +5,41 @@ extends Area2D
 var operatorNumber = 0
 @export var enemyPresent = false
 @export var damaged = true
-
 @onready var section = self
 
 var bodiesInside = []
 
-var Sattack = false    #FIREEE!!!
 var Srepair = false    #Fixing the equipment
-var SrepairMove = false
 var Sfull = false      #Section is full
-var Swalking = false   #Moving horizontal
-var Sjump = false      #Moving vertical
-var Schecking = false  #Checking gun
-var Sidle = false      #Idle moving
 
+var Scheck = false
+
+func _ready():
+	Srepair = false   
+	Sfull = false     
+	Scheck = false
+	enemyPresent = false
+	damaged = false
+	
+	sitrep()
 
 func _physics_process(delta):
-	if damaged:
-		Srepair = true
 	
 	sitrep()
 
 func sitrep(): #situation report -> sitrep get it?
 	for e in bodiesInside.size():
-		bodiesInside[e].operatorNum = operatorNumber
-		bodiesInside[e].section_position = position
+		operatorNumber = bodiesInside.size()
+		if !bodiesInside[e].moving: 
+			if operatorNumber > MaxOperators:
+				for w in bodiesInside.size():
+					if w > MaxOperators:
+						bodiesInside[w].full = true
+					else:
+						bodiesInside[w].full = false
+			bodiesInside[e].SectionObj = section
+			bodiesInside[e].operatorNum = operatorNumber
+			bodiesInside[e].section_position = position
 
 func _on_body_entered(body):
 	if body.is_in_group("Operators"):
@@ -57,6 +67,7 @@ func _on_input_event(viewport, event, shape_idx):
 			for gameObject in get_tree().get_nodes_in_group("Operators"):
 				if gameObject.selected:
 					gameObject.section_position = position
+					gameObject.SectionObj = section
 					gameObject._on_section_walk_order()
 					print("order sent")
 
