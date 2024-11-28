@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/Main.gd" id="1_oh1ee"]
 
 [node name="Node2D" type="Node2D"]
+position = Vector2(-1, -1)
 script = ExtResource("1_oh1ee")
 
 [node name="Control" type="Control" parent="."]
@@ -12,6 +13,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Panel" type="Panel" parent="Control"]
+visible = false
 modulate = Color(0.664872, 0.284763, 0.227471, 1)
 self_modulate = Color(0.761464, 0.233734, 0.229747, 1)
 clip_contents = true
