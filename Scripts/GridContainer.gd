@@ -15,5 +15,5 @@ func _ready():
 func create_cell(x, y):
 	var cell = Sprite2D.new()
 	cell.position = Vector2(x * CELL_SIZE, y * CELL_SIZE)
-	cell.texture = preload("res://icon.svg")  # Add a texture for visual representation
+	cell.texture = preload("res://Temp/icon.svg")  # Add a texture for visual representation
 	return cell
