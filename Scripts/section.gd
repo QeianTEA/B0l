@@ -4,22 +4,13 @@ extends Area2D
 
 var operatorNumber = 0
 @export var enemyPresent = false
-@export var damaged = true
+@export var damaged = false
 @onready var section = self
 
 var bodiesInside = []
 
-var Srepair = false    #Fixing the equipment
-var Sfull = false      #Section is full
-
-var Scheck = false
-
 func _ready():
-	Srepair = false   
-	Sfull = false     
-	Scheck = false
 	enemyPresent = false
-	damaged = false
 	
 	sitrep()
 

@@ -92,7 +92,7 @@ func _physics_process(delta):
 			#moving = false
 			#Attack()
 			State(3)
-		elif SectionObj.Srepair:  #ortaya gel öyle karar ver
+		elif SectionObj.damaged:  #ortaya gel öyle karar ver
 			#Repair()
 			State(4)
 		elif full:

@@ -61,11 +61,9 @@ MaxOperators = 0
 z_index = -1
 position = Vector2(122, 72)
 MaxOperators = 0
-damaged = false
 
 [node name="Section3" parent="Sections" instance=ExtResource("5_8rdun")]
 position = Vector2(10, 72)
 MaxOperators = 0
-damaged = false
 
 [connection signal="area_selected" from="Camera2D" to="." method="_on_area_selected"]
