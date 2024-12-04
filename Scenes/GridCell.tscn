@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://r6prly1uh4rh"]
 
-[ext_resource type="Script" path="res://Scripts/GridContainer.gd" id="1_nn4am"]
+[ext_resource type="Script" path="res://Scripts/GridContainer.gd" id="1_yyaiu"]
 
 [node name="Node2D" type="Node2D"]
 
@@ -14,7 +14,7 @@ offset_bottom = 40.0
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
-script = ExtResource("1_nn4am")
+script = ExtResource("1_yyaiu")
 
 [node name="Button" type="Button" parent="Control/GridContainer"]
 layout_mode = 2

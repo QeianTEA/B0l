@@ -10,5 +10,5 @@ texture = ExtResource("1_hicy2")
 script = ExtResource("2_vdbja")
 level_started = true
 tower_height = 2
-offset_y = 64
-grid_position = Vector2(1, 1)
+offset_y = -80
+grid_position = Vector2(0, 1)

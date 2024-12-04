@@ -94,9 +94,12 @@ func snap_to_grid_using_position(grid_pos: Vector2):
 		return
 
 	# Convert grid position to local snapped position
-	var snapped_local_pos = grid_pos * grid_size
+	#var snapped_local_pos = grid_pos * grid_size
+	var snapped_local_pos = grid_pos  * grid_size 
 	snapped_local_pos.x += offset_x
+
 	snapped_local_pos.y += offset_y
+	
 
 	# Convert snapped local position to global position
 	global_position = grid_container.global_position + snapped_local_pos
