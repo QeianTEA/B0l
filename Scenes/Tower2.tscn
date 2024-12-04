@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://de4053al1piwo"]
+
+[ext_resource type="Texture2D" uid="uid://dkgqjbtncjuns" path="res://Temp/pixil-frame-0.png" id="1_s1dng"]
+[ext_resource type="Script" path="res://Scripts/Tower.gd" id="2_jia6b"]
+
+[node name="Sprite2D" type="Sprite2D"]
+texture = ExtResource("1_s1dng")
+script = ExtResource("2_jia6b")
+initial_pos = Vector2(550, 384)
+tower_height = 2
+offset_y = 64

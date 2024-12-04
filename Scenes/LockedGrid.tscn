@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://cd15534bk1g"]
+
+[ext_resource type="Script" path="res://Scripts/LockedGrid.gd" id="1_i3c5u"]
+
+[node name="Node2D" type="Node2D"]
+position = Vector2(-1, -1)
+script = ExtResource("1_i3c5u")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Panel" type="Panel" parent="Control"]
+visible = false
+modulate = Color(0.664872, 0.284763, 0.227471, 1)
+self_modulate = Color(0.761464, 0.233734, 0.229747, 1)
+clip_contents = true
+layout_mode = 0
+offset_left = 600.0
+offset_right = 1200.0
+offset_bottom = 700.0
