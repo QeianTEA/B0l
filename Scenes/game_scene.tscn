@@ -61,6 +61,7 @@ MaxOperators = 0
 z_index = -1
 position = Vector2(122, 72)
 MaxOperators = 0
+damaged = true
 
 [node name="Section3" parent="Sections" instance=ExtResource("5_8rdun")]
 position = Vector2(10, 72)

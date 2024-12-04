@@ -11,7 +11,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @export var MaxHp = 100
 @export var MaxSpeed = 10
 var health
-var speed
+var speed: int
 
 var click_position = Vector2()
 var section_position = Vector2()
@@ -45,6 +45,7 @@ func _ready():
 	set_selected(selected)
 	box.visible = false
 	full = false
+	speed = MaxSpeed
 	
 	health = MaxHp;
 	click_position = position
@@ -92,41 +93,45 @@ func _physics_process(delta):
 			#moving = false
 			#Attack()
 			State(3)
-		elif SectionObj.damaged:  #ortaya gel öyle karar ver
+		elif SectionObj.damaged && operatorNum < 3:  #ortaya gel öyle karar ver
 			#Repair()
+			attacking = false
 			State(4)
 		elif full:
 			#Idle()
+			attacking = false
 			State(1)
 		else:
 			#CheckGun()
+			attacking = false
 			State(5)
 	
 	if idle && !moving:
 		velocity = walkDirection * speed
 		move_and_slide()
 	
-	if repairMove && !moving:
-		if operatorNum > 3:
+	if repairMove && !moving && !repairing:
+		if SectionObj.operatorNumber > 3:
 			repairMove = false
 		else:
+			repairing = true
 			match(operatorNum):
+				0:
+					var directionR = (Vector2(section_position.x - 20, 0) - Vector2(position.x, 0)).normalized()
+					velocity = directionR * speed
+					if Vector2(position.x, 0).distance_to(Vector2(section_position.x - 20, 0)) < 5:
+						repairMove = false
+					move_and_slide()
 				1:
-					var direction = (Vector2(section_position.x, 0) - Vector2(position.x, 0)).normalized()
-					velocity = direction * speed
-					if Vector2(position.x, 0).distance_to(Vector2(section_position.x - 20, 0)) < 2:
+					var directionR = (Vector2(section_position.x + 40, 0) - Vector2(position.x, 0)).normalized()
+					velocity = directionR * speed
+					if Vector2(position.x, 0).distance_to(Vector2(section_position.x + 40, 0)) < 5:
 						repairMove = false
 					move_and_slide()
 				2:
-					var direction = (Vector2(section_position.x + 40, 0) - Vector2(position.x, 0)).normalized()
-					velocity = direction * speed
-					if Vector2(position.x, 0).distance_to(Vector2(section_position.x + 40, 0)) < 2:
-						repairMove = false
-					move_and_slide()
-				3:
-					var direction = (Vector2(section_position.x + 80, 0) - Vector2(position.x, 0)).normalized()
-					velocity = direction * speed
-					if Vector2(position.x, 0).distance_to(Vector2(section_position.x + 100, 0)) < 2:
+					var directionR = (Vector2(section_position.x + 80, 0) - Vector2(position.x, 0)).normalized()
+					velocity = directionR * speed
+					if Vector2(position.x, 0).distance_to(Vector2(section_position.x + 100, 0)) < 5:
 						repairMove = false
 					move_and_slide()
 
@@ -135,24 +140,33 @@ func State(nunmber):
 		1: #idle
 			anim.play("idle")
 			idle = true
+			repairing = false
+			checking = false
 			speed = MaxSpeed/3
 		2: #moving / jumping
 			anim.play("walk")
 			z_index = 2
+			repairing = false
+			operatorNum = 0
+			idle = false
+			checking = false
 			speed = MaxSpeed
 			print("walking")
 		3: #attacking
 			anim.play("attack")
+			repairing = false
+			checking = false
 			print("attacking")
 		4: #repearing
 			anim.play("repair")
 			repairMove = true
+			idle = false
+			checking = false
 			z_index = 1
-			print("repairing")
 		5: #checking gun
 			anim.play("check")
-			SectionObj.Scheck = true
 			checking = true
+			repairing = false
 			z_index = 1
 			
 			
