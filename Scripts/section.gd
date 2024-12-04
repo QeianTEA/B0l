@@ -29,7 +29,7 @@ func sitrep(): #situation report -> sitrep get it?
 					else:
 						bodiesInside[w].full = false
 			bodiesInside[e].SectionObj = section
-			bodiesInside[e].operatorNum = operatorNumber
+			bodiesInside[e].operatorNum = e
 			bodiesInside[e].section_position = position
 
 func _on_body_entered(body):
