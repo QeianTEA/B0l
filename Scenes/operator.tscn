@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://b2wl4oeckkpci" path="res://Assets/Operator/Sprites/4.png" id="4_pvtmw"]
 [ext_resource type="StyleBox" uid="uid://c0tiqddh1k7p2" path="res://Assets/PanelStyleMaps/OperatorSelected.tres" id="4_ts5mu"]
 [ext_resource type="Texture2D" uid="uid://dbsn4v8vxbx8n" path="res://Assets/Operator/Sprites/3.png" id="5_byq3s"]
-[ext_resource type="Texture2D" uid="uid://ctx1kyhn2yhgy" path="res://Assets/Operator/Sprites/5.png" id="6_6370a"]
+[ext_resource type="Texture2D" uid="uid://253qaruqtvf" path="res://Assets/Operator/Sprites/0.png" id="6_6g6q3"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_wruk6"]
 animations = [{
@@ -39,7 +39,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("6_6370a")
+"texture": ExtResource("6_6g6q3")
 }],
 "loop": true,
 "name": &"repair",
@@ -75,7 +75,7 @@ texture = ExtResource("2_6l7va")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(1.77253, 2.157)
 sprite_frames = SubResource("SpriteFrames_wruk6")
-animation = &"idle"
+animation = &"repair"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

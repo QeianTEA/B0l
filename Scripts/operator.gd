@@ -81,7 +81,7 @@ func _physics_process(delta):
 		State(2)
 		idle = false
 	
-	if moving && SectionObj != null:
+	if moving && SectionObj != null && !repairMove:
 		var direction = (Vector2(section_position.x + 40 , 0) - Vector2(position.x, 0)).normalized()
 		velocity = direction * speed
 		if Vector2(position.x, 0).distance_to(Vector2(section_position.x + 40, 0)) < 5:
@@ -110,29 +110,34 @@ func _physics_process(delta):
 		velocity = walkDirection * speed
 		move_and_slide()
 	
-	if repairMove && !moving && !repairing:
+	if repairMove && !moving:
 		if SectionObj.operatorNumber > 3:
 			repairMove = false
 		else:
-			repairing = true
 			match(operatorNum):
 				0:
-					var directionR = (Vector2(section_position.x - 20, 0) - Vector2(position.x, 0)).normalized()
+					var directionR = (Vector2(section_position.x + 10, 0) - Vector2(position.x, 0)).normalized()
 					velocity = directionR * speed
-					if Vector2(position.x, 0).distance_to(Vector2(section_position.x - 20, 0)) < 5:
+					if Vector2(position.x, 0).distance_to(Vector2(section_position.x + 10, 0)) < 5:
 						repairMove = false
+						repairing = true
+						anim.play("repair")
 					move_and_slide()
 				1:
 					var directionR = (Vector2(section_position.x + 40, 0) - Vector2(position.x, 0)).normalized()
 					velocity = directionR * speed
 					if Vector2(position.x, 0).distance_to(Vector2(section_position.x + 40, 0)) < 5:
 						repairMove = false
+						repairing = true
+						anim.play("repair")
 					move_and_slide()
 				2:
-					var directionR = (Vector2(section_position.x + 80, 0) - Vector2(position.x, 0)).normalized()
+					var directionR = (Vector2(section_position.x + 70, 0) - Vector2(position.x, 0)).normalized()
 					velocity = directionR * speed
-					if Vector2(position.x, 0).distance_to(Vector2(section_position.x + 100, 0)) < 5:
+					if Vector2(position.x, 0).distance_to(Vector2(section_position.x + 70, 0)) < 5:
 						repairMove = false
+						repairing = true
+						anim.play("repair")
 					move_and_slide()
 
 func State(nunmber):
@@ -147,6 +152,7 @@ func State(nunmber):
 			anim.play("walk")
 			z_index = 2
 			repairing = false
+			repairMove = false
 			operatorNum = 0
 			idle = false
 			checking = false
@@ -158,8 +164,8 @@ func State(nunmber):
 			checking = false
 			print("attacking")
 		4: #repearing
-			anim.play("repair")
-			repairMove = true
+			if !repairing:
+				repairMove = true
 			idle = false
 			checking = false
 			z_index = 1

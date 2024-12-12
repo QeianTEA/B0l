@@ -23,11 +23,10 @@ func sitrep(): #situation report -> sitrep get it?
 		operatorNumber = bodiesInside.size()
 		if !bodiesInside[e].moving: 
 			if operatorNumber > MaxOperators:
-				for w in bodiesInside.size():
-					if w > MaxOperators:
-						bodiesInside[w].full = true
-					else:
-						bodiesInside[w].full = false
+				if e > MaxOperators:
+					bodiesInside[e].full = true
+				else:
+					bodiesInside[e].full = false
 			bodiesInside[e].SectionObj = section
 			bodiesInside[e].operatorNum = e
 			bodiesInside[e].section_position = position
