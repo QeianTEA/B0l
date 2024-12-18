@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://2ktwxn8ugfhs"]
+
+[ext_resource type="Texture2D" uid="uid://bwqdxyglau1r6" path="res://Assets/Tower3.jpg" id="1_dpbqv"]
+[ext_resource type="Script" path="res://Scripts/Tower.gd" id="2_k2wjs"]
+
+[node name="Sprite2D" type="Sprite2D"]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_dpbqv")
+centered = false
+script = ExtResource("2_k2wjs")
+initial_pos = Vector2(550, 384)
+tower_width = 2
+tower_height = 2
+offset_x = 64
+offset_y = 64

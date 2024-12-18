@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://qa86005xyh3o"]
+
+[ext_resource type="Texture2D" uid="uid://bwqdxyglau1r6" path="res://Assets/Tower3.jpg" id="1_nf8qi"]
+[ext_resource type="Script" path="res://Scripts/TowerLock.gd" id="2_74af3"]
+
+[node name="Sprite2D" type="Sprite2D"]
+z_index = 1
+z_as_relative = false
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_nf8qi")
+script = ExtResource("2_74af3")
+initial_pos = Vector2(1, 1)
+tower_width = 2
+tower_height = 2
+grid_position = Vector2(1, 1)

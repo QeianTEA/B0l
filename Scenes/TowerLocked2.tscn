@@ -7,9 +7,8 @@
 z_index = 1
 z_as_relative = false
 texture = ExtResource("1_hicy2")
+offset = Vector2(0, 64)
 script = ExtResource("2_vdbja")
-initial_pos = Vector2(1, 1)
-level_started = true
+initial_pos = Vector2(0, 1)
 tower_height = 2
-offset_y = 64
-grid_position = Vector2(0, 1)
+grid_position = Vector2(0, 0)

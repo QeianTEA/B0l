@@ -8,4 +8,3 @@ texture = ExtResource("1_s1dng")
 script = ExtResource("2_jia6b")
 initial_pos = Vector2(550, 384)
 tower_height = 2
-offset_y = 64

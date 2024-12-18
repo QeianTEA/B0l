@@ -8,5 +8,4 @@ z_index = 1
 z_as_relative = false
 texture = ExtResource("1_enxvl")
 script = ExtResource("2_law2w")
-level_started = true
 grid_position = Vector2(0, 0)

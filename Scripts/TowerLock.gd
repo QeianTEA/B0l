@@ -5,24 +5,16 @@ var drag_offset = Vector2()
 var grid_size = 128  # Size of each cell in the grid (should be same as the texture size)
 @export var initial_pos = Vector2()
 
-@export var level_started = false 
-
+@export var level_started = false
 
 @export var tower_width = 1  # Width of the tower in grid cells
 @export var tower_height = 1  # Height of the tower in grid cells
-
-@export var offset_x = 0
-@export var offset_y = 0
 
 @export var grid_position = Vector2(-1, -1)
 
 var grid_container: GridContainer = null
 
 func _ready():
-
-	#if grid_position != Vector2(-1, -1):  # If valid grid position is set
-	#	snap_to_grid_using_position(grid_position)
-	
 	if !level_started:
 		position = initial_pos
 	
@@ -64,15 +56,18 @@ func snap_to_grid():
 	var local_pos = global_position - grid_container.global_position
 	print("Local Position before snapping: ", local_pos)
 
-	var snapped_x = floor(local_pos.x / grid_size) * grid_size
-	var snapped_y = floor(local_pos.y / grid_size) * grid_size
-	
-	snapped_y += offset_y
-	snapped_x += offset_x
-	
+	# Snapping logic: Ensure positions are aligned to grid with tower size considered
+	var snapped_x = round(local_pos.x / grid_size) * grid_size
+	var snapped_y = round(local_pos.y / grid_size) * grid_size
+
+	# Align based on tower size, so the tower's top-left corner aligns with the grid
+	snapped_x = int(snapped_x) - int(snapped_x) % grid_size  # Align to grid based on width
+	snapped_y = int(snapped_y) - int(snapped_y) % grid_size  # Align to grid based on height
+
 	var grid_dimensions_x = grid_container.grid_columns
 	var grid_dimensions_y = grid_container.grid_rows
 
+	# Clamp the snapped position based on tower size and grid boundaries
 	snapped_x = clamp(snapped_x, 0, (grid_dimensions_x - tower_width) * grid_size)
 	snapped_y = clamp(snapped_y, 0, (grid_dimensions_y - tower_height) * grid_size)
 
@@ -82,8 +77,8 @@ func snap_to_grid():
 	global_position = grid_container.global_position + snapped_local_pos
 	print("Global Position after snapping: ", global_position)
 
-	# Save grid position
-	grid_position = Vector2(snapped_x / grid_size, snapped_y / grid_size)
+	# Save grid position (top-left corner)
+	grid_position = Vector2(round(snapped_x / grid_size), round(snapped_y / grid_size))
 	print("Saved grid position: ", grid_position)
 
 	validate_position(local_pos)
@@ -93,15 +88,9 @@ func snap_to_grid_using_position(grid_pos: Vector2):
 		print("Grid container is null")
 		return
 
-	# Convert grid position to local snapped position
-	#var snapped_local_pos = grid_pos * grid_size
-	var snapped_local_pos = grid_pos  * grid_size 
-	snapped_local_pos.x += offset_x
+	# Convert grid position to local snapped position using top-left corner
+	var snapped_local_pos = grid_pos * grid_size
 
-	snapped_local_pos.y += offset_y
-	
-
-	# Convert snapped local position to global position
 	global_position = grid_container.global_position + snapped_local_pos
 	print("Snapped to grid position: ", grid_pos)
 
@@ -115,17 +104,17 @@ func validate_position(local_pos):
 	var grid_dimensions_x = grid_container.grid_columns
 	var grid_dimensions_y = grid_container.grid_rows
 
-	if grid_x < 0 - offset_x or grid_y < 0 - offset_y or grid_x + tower_width > grid_dimensions_x + offset_x or grid_y + tower_height > grid_dimensions_y + offset_y:
+	if grid_x < 0 or grid_y < 0 or grid_x + tower_width > grid_dimensions_x or grid_y + tower_height > grid_dimensions_y:
 		print("Out of grid bounds, reverting to initial position")
 		global_position = initial_pos
 		grid_position = Vector2(-1, -1)  # Reset grid position to invalid
 		return
 
-	var self_rect = Rect2(global_position, Vector2(tower_width * grid_size - offset_x, tower_height * grid_size - offset_y))
+	var self_rect = Rect2(global_position, Vector2(tower_width * grid_size, tower_height * grid_size))
 	for child in get_parent().get_children():
 		if child != self and child is Sprite2D:
 			var child_pos = child.global_position
-			var child_rect = Rect2(child_pos, Vector2(child.tower_width * grid_size - child.offset_x, child.tower_height * grid_size - child.offset_y))
+			var child_rect = Rect2(child_pos, Vector2(child.tower_width * grid_size, child.tower_height * grid_size))
 			if child_rect.intersects(self_rect):
 				print("Collision detected, reverting to initial position")
 				global_position = initial_pos
