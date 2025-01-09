@@ -64,3 +64,4 @@ func _on_input_event(viewport, event, shape_idx):
 #func _on_area_2d_body_entered_middle(body):
 #	if body.is_in_group("Operators"):
 #		if (Vector2(position.x + 40, 0).distance_to(Vector2(body.position.x, 0)) < 30):
+

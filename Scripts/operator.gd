@@ -82,11 +82,12 @@ func _physics_process(delta):
 		idle = false
 	
 	if moving && SectionObj != null && !repairMove:
-		var direction = (Vector2(section_position.x + 40 , 0) - Vector2(position.x, 0)).normalized()
-		velocity = direction * speed
-		if Vector2(position.x, 0).distance_to(Vector2(section_position.x + 40, 0)) < 5:
-			moving = false
-		move_and_slide()
+		#var direction = (Vector2(section_position.x + 40 , 0) - Vector2(position.x, 0)).normalized()
+		#velocity = direction * speed
+		#if Vector2(position.x, 0).distance_to(Vector2(section_position.x + 40, 0)) < 5:
+		#	moving = false
+		#move_and_slide()
+		return
 	elif SectionObj != null:
 		if SectionObj.enemyPresent:   #direkt saldır
 			attacking = true
@@ -140,6 +141,39 @@ func _physics_process(delta):
 						anim.play("repair")
 					move_and_slide()
 
+func move_operator(operator, path):
+	moving = true
+	State(2)  # Set the state to "walking"
+	
+	for tile in path:
+		var target_position = tile_to_world(tile)
+		while position.distance_to(target_position) > 5:  # Adjust tolerance as needed
+			var direction = (target_position - position).normalized()
+			velocity = direction * speed
+			move_and_slide()
+			await (get_tree().create_timer(0.01))  # Small delay to make movement smooth
+		
+		# Snap operator to the exact tile position after each step
+		position = target_position
+		await (get_tree().create_timer(0.1))  # Add a slight delay before moving to the next tile
+	
+	# Path completed
+	moving = false
+	State(1)  # Set state to "idle" when the path is complete
+
+func tile_to_world(tile: Vector2) -> Vector2:
+	# Assuming each tile is a fixed size (e.g., 64x64)
+	return Vector2(tile.x * 64, tile.y * 64)
+
+func world_to_tile(world_position: Vector2) -> Vector2:
+	# Convert world position to grid position (tile-based)
+	return Vector2(floor(world_position.x / 64), floor(world_position.y / 64))
+
+func tile(grid_position: Vector2) -> Vector2:
+	# Convert a position to the tile grid system
+	return world_to_tile(grid_position)
+
+
 func State(nunmber):
 	match(nunmber):
 		1: #idle
@@ -174,11 +208,17 @@ func State(nunmber):
 			checking = true
 			repairing = false
 			z_index = 1
-			
-			
 
+@onready var gameScript = get_tree().root.get_node("GameScene")
 
 func _on_section_walk_order():
-	if selected:
+	var start_tile = tile(position)
+	var target_tile = world_to_tile(section_position)
+	var path = gameScript.find_path(start_tile, target_tile)
+		
+	if path.size() > 0 && selected:
+		gameScript.move_operator(self, path)
 		moving = true
 		State(2)
+	else:
+		print("No valid path to target!")
