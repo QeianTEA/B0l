@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bnfq0tic6g41u"]
+
+[ext_resource type="Texture2D" uid="uid://dkgqjbtncjuns" path="res://Temp/pixil-frame-0.png" id="1_hicy2"]
+[ext_resource type="Script" path="res://Scripts/TowerLock.gd" id="2_vdbja"]
+
+[node name="Sprite2D" type="Sprite2D"]
+z_index = 1
+z_as_relative = false
+texture = ExtResource("1_hicy2")
+offset = Vector2(0, 64)
+script = ExtResource("2_vdbja")
+initial_pos = Vector2(0, 1)
+tower_height = 2
+grid_position = Vector2(0, 0)

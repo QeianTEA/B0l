@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://c18g3hw3ha30n"]
+
+[ext_resource type="Texture2D" uid="uid://rk0u8mt4vtas" path="res://Temp/icon2.svg" id="1_enxvl"]
+[ext_resource type="Script" path="res://Scripts/TowerLock.gd" id="2_law2w"]
+
+[node name="Sprite2D" type="Sprite2D"]
+z_index = 1
+z_as_relative = false
+texture = ExtResource("1_enxvl")
+script = ExtResource("2_law2w")
+grid_position = Vector2(0, 0)
