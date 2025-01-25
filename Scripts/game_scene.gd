@@ -31,7 +31,11 @@ func get_units_in_area(area):
 	return u
 	
 
-@export var grid = [] # Your 2D grid representing the map (1 = tile, 0 = hole)
+@export var grid = [
+	[1, 1, 1],
+	[1, 1, 1],
+	[1, 1, 1],
+	] # Your 2D grid representing the map (1 = tile, 0 = hole)
 var directions = [Vector2(0, -1), Vector2(0, 1), Vector2(-1, 0), Vector2(1, 0)] # Up, Down, Left, Right
 
 func find_path(start: Vector2, target: Vector2) -> Array:
