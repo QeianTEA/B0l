@@ -1,0 +1,71 @@
+[gd_scene load_steps=8 format=3 uid="uid://cgs7v0d38esuh"]
+
+[ext_resource type="Script" path="res://Scripts/game_scene_test.gd" id="1_im06y"]
+[ext_resource type="PackedScene" uid="uid://britc7oatw0ok" path="res://Scenes/Tilemap.tscn" id="2_psdi1"]
+[ext_resource type="Texture2D" uid="uid://hlxrly7om340" path="res://Temp/Gomi4.png" id="3_5sp68"]
+[ext_resource type="Script" path="res://Scripts/Camera2D.gd" id="4_i1hr0"]
+[ext_resource type="PackedScene" uid="uid://bqat16e5w0nyl" path="res://Scenes/operator.tscn" id="5_p1neu"]
+[ext_resource type="PackedScene" uid="uid://cuigwtfuwq13q" path="res://Scenes/section.tscn" id="6_k12pf"]
+[ext_resource type="Script" path="res://Scripts/section_test.gd" id="7_vv0us"]
+
+[node name="GameScene" type="Node2D"]
+script = ExtResource("1_im06y")
+grid = [null, null, null]
+
+[node name="TileMoa" parent="." instance=ExtResource("2_psdi1")]
+z_index = -2
+position = Vector2(162, 136)
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="DrawBox" type="Panel" parent="UI"]
+unique_name_in_owner = true
+offset_left = -45.0
+offset_top = -42.0
+offset_right = -5.0
+offset_bottom = -2.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Kiraz" type="Sprite2D" parent="."]
+position = Vector2(1307, 294)
+scale = Vector2(0.190833, 0.190833)
+texture = ExtResource("3_5sp68")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+limit_left = 0
+limit_top = 0
+script = ExtResource("4_i1hr0")
+
+[node name="Kiraz2" parent="." instance=ExtResource("5_p1neu")]
+position = Vector2(162, 134)
+scale = Vector2(0.920898, 0.777734)
+
+[node name="Kiraz3" parent="." instance=ExtResource("5_p1neu")]
+position = Vector2(56, 134)
+scale = Vector2(0.920898, 0.777734)
+
+[node name="Kiraz4" parent="." instance=ExtResource("5_p1neu")]
+position = Vector2(83, 134)
+scale = Vector2(0.920898, 0.777734)
+
+[node name="Kiraz5" parent="." instance=ExtResource("5_p1neu")]
+position = Vector2(187, 134)
+scale = Vector2(0.920898, 0.777734)
+
+[node name="Sections" type="Node2D" parent="."]
+
+[node name="Section" parent="Sections" instance=ExtResource("6_k12pf")]
+z_index = -1
+position = Vector2(234, 72)
+script = ExtResource("7_vv0us")
+
+[node name="Section2" parent="Sections" instance=ExtResource("6_k12pf")]
+z_index = -1
+position = Vector2(122, 72)
+script = ExtResource("7_vv0us")
+
+[node name="Section3" parent="Sections" instance=ExtResource("6_k12pf")]
+position = Vector2(10, 72)
+script = ExtResource("7_vv0us")
+
+[connection signal="area_selected" from="Camera2D" to="." method="_on_area_selected"]

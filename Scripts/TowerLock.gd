@@ -112,7 +112,7 @@ func validate_position(local_pos):
 
 	var self_rect = Rect2(global_position, Vector2(tower_width * grid_size, tower_height * grid_size))
 	for child in get_parent().get_children():
-		if child != self and child is Sprite2D:
+		if child != self and child is Sprite2D and child.has_meta("tower_width") and child.has("tower_height"):
 			var child_pos = child.global_position
 			var child_rect = Rect2(child_pos, Vector2(child.tower_width * grid_size, child.tower_height * grid_size))
 			if child_rect.intersects(self_rect):
