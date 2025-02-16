@@ -4,8 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://britc7oatw0ok" path="res://Scenes/Tilemap.tscn" id="2_psdi1"]
 [ext_resource type="Texture2D" uid="uid://hlxrly7om340" path="res://Temp/Gomi4.png" id="3_5sp68"]
 [ext_resource type="Script" path="res://Scripts/Camera2D.gd" id="4_i1hr0"]
-[ext_resource type="PackedScene" uid="uid://bqat16e5w0nyl" path="res://Scenes/operator.tscn" id="5_p1neu"]
-[ext_resource type="PackedScene" uid="uid://cuigwtfuwq13q" path="res://Scenes/section.tscn" id="6_k12pf"]
+[ext_resource type="PackedScene" uid="uid://bqat16e5w0nyl" path="res://Scenes/Prefabs/operator.tscn" id="5_p1neu"]
+[ext_resource type="PackedScene" uid="uid://cuigwtfuwq13q" path="res://Scenes/Prefabs/Towers/section.tscn" id="6_k12pf"]
 [ext_resource type="Script" path="res://Scripts/section_test.gd" id="7_vv0us"]
 
 [node name="GameScene" type="Node2D"]

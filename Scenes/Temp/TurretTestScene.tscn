@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://mxbra1fi173o"]
 
-[ext_resource type="PackedScene" uid="uid://f4wpy8vw8ds" path="res://Scenes/Enemy.tscn" id="1_luq74"]
-[ext_resource type="PackedScene" uid="uid://cbfprpq22cv4w" path="res://Scenes/Turret.tscn" id="2_ya5u2"]
+[ext_resource type="PackedScene" uid="uid://f4wpy8vw8ds" path="res://Scenes/Prefabs/Enemy.tscn" id="1_luq74"]
+[ext_resource type="PackedScene" uid="uid://cbfprpq22cv4w" path="res://Scenes/Prefabs/Towers/Turret.tscn" id="2_ya5u2"]
 
 [sub_resource type="Animation" id="Animation_b358o"]
 length = 0.001

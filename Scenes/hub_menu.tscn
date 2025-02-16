@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://cv8k35gdwbneb"]
+
+[node name="HubMenu" type="Node2D"]
+
+[node name="Buttons" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="BarMenu" type="Node2D" parent="."]
+
+[node name="HangarMenu" type="Node2D" parent="."]
+
+[node name="BridgeMenu" type="Node2D" parent="."]

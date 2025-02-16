@@ -33,8 +33,8 @@ func get_units_in_area(area):
 
 @export var grid = [
 	[1, 1, 1],
-	[1, 1, 1],
-	[1, 1, 1],
+	[1, 0, 1],
+	[1, 0, 1],
 	] # Your 2D grid representing the map (1 = tile, 0 = hole)
 var directions = [Vector2(0, -1), Vector2(0, 1), Vector2(-1, 0), Vector2(1, 0)] # Up, Down, Left, Right
 
