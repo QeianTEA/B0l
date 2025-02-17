@@ -161,17 +161,17 @@ func move_operator(operator, path):
 	moving = false
 	State(1)  # Set state to "idle" when the path is complete
 
-func tile_to_world(tile: Vector2) -> Vector2:
-	# Assuming each tile is a fixed size (e.g., 64x64)
-	return Vector2(tile.x * 64, tile.y * 64)
-
-func world_to_tile(world_position: Vector2) -> Vector2:
-	# Convert world position to grid position (tile-based)
-	return Vector2(floor(world_position.x / 64), floor(world_position.y / 64))
-
-func tile(grid_position: Vector2) -> Vector2:
-	# Convert a position to the tile grid system
-	return world_to_tile(grid_position)
+#func tile_to_world(tile: Vector2) -> Vector2:
+	## Assuming each tile is a fixed size (e.g., 64x64)
+	#return Vector2(tile.x * 64, tile.y * 64)
+#
+#func world_to_tile(world_position: Vector2) -> Vector2:
+	## Convert world position to grid position (tile-based)
+	#return Vector2(floor(world_position.x / 64), floor(world_position.y / 64))
+#
+#func tile(grid_position: Vector2) -> Vector2:
+	## Convert a position to the tile grid system
+	#return world_to_tile(grid_position)
 
 
 func State(nunmber):
