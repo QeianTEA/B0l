@@ -9,11 +9,10 @@ const is_solid = "is_solid"
 
 func _ready():
 	setup_grid()
-	show_path()
 
 
 func setup_grid():
-	astargrid.region = Rect2i(0,0,6,5)  #EXPORT HERE FOR SIZE CHANGES
+	astargrid.region = get_used_rect()
 	astargrid.cell_size = Vector2i(40,40)  #EXPORT HERE FOR SIZE CHANGES
 	astargrid.default_compute_heuristic = AStarGrid2D.HEURISTIC_MANHATTAN
 	astargrid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
@@ -23,7 +22,7 @@ func setup_grid():
 		astargrid.set_point_solid(cell, is_spot_solid(cell))
 
 
-func show_path():
+func show_path(a,b):
 	var path_taken = astargrid.get_id_path(Vector2i(1,1), Vector2i(3,1))
 	for cell in path_taken:
 		set_cell(main_layer, cell, main_source, path_taken_atlas_coords)

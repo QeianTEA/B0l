@@ -5,6 +5,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @export var selected = false
 
 @onready var anim = $AnimatedSprite2D
+@export var tilemap: TileMap
 
 @onready var box = $Selected
 
@@ -39,9 +40,13 @@ var idle = false         #Idle moving
 
 var statusChanged = false
 
+
+var astargrid = AStarGrid2D.new()
+
 @warning_ignore("unassigned_variable", "unused_parameter")
 
 func _ready():
+	setup_grid()
 	set_selected(selected)
 	box.visible = false
 	full = false
@@ -87,7 +92,13 @@ func _physics_process(delta):
 		#if Vector2(position.x, 0).distance_to(Vector2(section_position.x + 40, 0)) < 5:
 		#	moving = false
 		#move_and_slide()
-		return
+		anim.global_position = anim.global_position.move_toward(global_position, 0.5)
+		
+		if anim.global_position != global_position:
+			return
+		
+		moving = false
+		State(1)
 	elif SectionObj != null:
 		if SectionObj.enemyPresent:   #direkt saldır
 			attacking = true
@@ -141,38 +152,23 @@ func _physics_process(delta):
 						anim.play("repair")
 					move_and_slide()
 
-func move_operator(operator, path):
+func move_operator():
+	var path = astargrid.get_id_path(tilemap.local_to_map(global_position),tilemap.local_to_map(SectionObj.global_position))
+	
+	path.pop_front()
+	
+	if path.is_empty():
+		print("cant find path")
+		moving = false
+		return
+	
+	var original_position = Vector2(global_position)
+	
+	global_position = tilemap.map_to_local(path[0])
+	anim.global_position = original_position
+	
 	moving = true
 	State(2)  # Set the state to "walking"
-	
-	for tile in path:
-		var target_position = tile_to_world(tile)
-		while position.distance_to(target_position) > 5:  # Adjust tolerance as needed
-			var direction = (target_position - position).normalized()
-			velocity = direction * speed
-			move_and_slide()
-			await (get_tree().create_timer(0.01))  # Small delay to make movement smooth
-		
-		# Snap operator to the exact tile position after each step
-		position = target_position
-		await (get_tree().create_timer(0.1))  # Add a slight delay before moving to the next tile
-	
-	# Path completed
-	moving = false
-	State(1)  # Set state to "idle" when the path is complete
-
-#func tile_to_world(tile: Vector2) -> Vector2:
-	## Assuming each tile is a fixed size (e.g., 64x64)
-	#return Vector2(tile.x * 64, tile.y * 64)
-#
-#func world_to_tile(world_position: Vector2) -> Vector2:
-	## Convert world position to grid position (tile-based)
-	#return Vector2(floor(world_position.x / 64), floor(world_position.y / 64))
-#
-#func tile(grid_position: Vector2) -> Vector2:
-	## Convert a position to the tile grid system
-	#return world_to_tile(grid_position)
-
 
 func State(nunmber):
 	match(nunmber):
@@ -212,13 +208,23 @@ func State(nunmber):
 @onready var gameScript = get_tree().root.get_node("GameScene")
 
 func _on_section_walk_order():
-	var start_tile = tile(position)
-	var target_tile = world_to_tile(section_position)
-	var path = gameScript.find_path(start_tile, target_tile)
-		
-	if path.size() > 0 && selected:
-		gameScript.move_operator(self, path)
-		moving = true
-		State(2)
-	else:
-		print("No valid path to target!")
+	move_operator()
+
+func setup_grid():
+	astargrid.region = tilemap.get_used_rect()
+	astargrid.cell_size = Vector2i(40,40)  #EXPORT HERE FOR SIZE CHANGES
+	astargrid.default_compute_heuristic = AStarGrid2D.HEURISTIC_MANHATTAN
+	astargrid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
+	astargrid.update()
+	
+	var region_size = astargrid.region.size
+	var region_position = astargrid.region.position
+	
+	for x in region_size.x:
+		for y in region_size.y:
+			var tile_position = Vector2i(x + region_position.x, y + region_position.y)
+			
+			var tile_data = tilemap.get_cell_tile_data(0, tile_position)
+			
+			if tile_data != null or tilemap.get_custom_data("is_solid"):
+				astargrid.set_point_solid(tile_position)

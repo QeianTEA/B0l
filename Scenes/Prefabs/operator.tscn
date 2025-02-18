@@ -65,8 +65,6 @@ z_index = 2
 scale = Vector2(0.63725, 0.663847)
 collision_layer = 2
 script = ExtResource("1_kug7e")
-selected = null
-MaxHp = null
 MaxSpeed = 100
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

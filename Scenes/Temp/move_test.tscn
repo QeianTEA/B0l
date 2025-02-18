@@ -2,8 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://btdf1i5tuafcp" path="res://Temp/image_45.png" id="1_pu1ql"]
 [ext_resource type="Texture2D" uid="uid://cjll2yivh52a2" path="res://Temp/icon.svg" id="2_ajbjn"]
-[ext_resource type="Script" path="res://Scenes/Temp/TileMapMove.gd" id="2_vr1n5"]
 [ext_resource type="Texture2D" uid="uid://hlxrly7om340" path="res://Temp/Gomi4.png" id="3_3olk6"]
+[ext_resource type="PackedScene" uid="uid://bqat16e5w0nyl" path="res://Scenes/Prefabs/operator.tscn" id="5_nqisw"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ie36f"]
 texture = ExtResource("1_pu1ql")
@@ -67,10 +67,9 @@ sources/2 = SubResource("TileSetAtlasSource_ket35")
 tile_set = SubResource("TileSet_l2aaf")
 format = 2
 layer_0/tile_data = PackedInt32Array(65536, 1, 4, 65537, 65537, 1, 65538, 1, 4, 0, 1, 4, 2, 1, 4, 1, 1, 4, 3, 1, 4, 4, 1, 4, 65540, 65537, 1, 65539, 65537, 1, 131072, 1, 4, 131073, 65537, 1, 131074, 1, 4, 131075, 65537, 1, 131076, 1, 4, 131077, 65537, 1, 65541, 65537, 1, 5, 1, 4, 196608, 1, 4, 196609, 65537, 1, 196610, 65537, 1, 196611, 1, 4, 196612, 1, 4, 196613, 65537, 1, 262144, 1, 4, 262145, 1, 4, 262146, 65537, 1, 262147, 65537, 1, 262148, 65537, 1, 327680, 1, 4, 327681, 1, 4, 327682, 1, 4, 327683, 1, 4, 327684, 1, 4, 262149, 65537, 1, 262150, 1, 4, 196614, 1, 4, 131078, 1, 4, 327685, 1, 4, 327686, 1, 4, 65542, 1, 4, 6, 1, 4)
-script = ExtResource("2_vr1n5")
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
-position = Vector2(64, 54)
+position = Vector2(141, 100)
 scale = Vector2(0.0133267, 0.0133267)
 collision_layer = 7
 
@@ -83,3 +82,8 @@ visible = false
 position = Vector2(0, 75.0371)
 scale = Vector2(138.649, 138.649)
 shape = SubResource("RectangleShape2D_lpudi")
+
+[node name="Operator" parent="." node_paths=PackedStringArray("tilemap") instance=ExtResource("5_nqisw")]
+position = Vector2(60, 59)
+scale = Vector2(0.433767, 0.316195)
+tilemap = NodePath("../TileMap")
