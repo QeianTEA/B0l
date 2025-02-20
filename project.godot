@@ -17,7 +17,7 @@ config/icon="res://Assets/Misc/icon.svg"
 
 [display]
 
-window/size/viewport_width=720
+window/size/viewport_width=1080
 window/size/viewport_height=720
 window/size/window_width_override=320
 window/size/window_height_override=180

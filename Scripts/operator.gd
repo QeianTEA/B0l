@@ -39,6 +39,7 @@ var checking = false     #Checking gun
 var idle = false         #Idle moving
 
 var statusChanged = false
+var in_animation = false
 
 
 var astargrid = AStarGrid2D.new()
@@ -72,10 +73,12 @@ var target_cell = null
 func _input(event):
 	if event.is_action_pressed("RightClick") && selected:
 		var mouse_pos = get_global_mouse_position()  # Get mouse position in world coordinates
-		var tile_pos = tilemap.local_to_map(to_local(mouse_pos))  # Convert world position to tile coordinates
-		var tile_center = tilemap.map_to_local(tile_pos)  # Convert tile coordinates back to world position
 		
-		target_cell = tile_center
+		target_cell = mouse_pos
+		move_operator()
+
+func _process(delta):
+	if moving && !in_animation:
 		move_operator()
 
 func _physics_process(delta):
@@ -103,10 +106,10 @@ func _physics_process(delta):
 		anim.global_position = anim.global_position.move_toward(global_position, 0.5)
 		
 		if anim.global_position != global_position:
+			in_animation = true
 			return
-		
-		moving = false
-		State(1)
+			
+		in_animation = false
 	elif SectionObj != null:
 		if SectionObj.enemyPresent:   #direkt saldır
 			attacking = true
@@ -161,18 +164,21 @@ func _physics_process(delta):
 					move_and_slide()
 
 func move_operator():
-	var path = astargrid.get_id_path(tilemap.local_to_map(position),tilemap.local_to_map(target_cell))
+	print(tilemap.local_to_map(target_cell))
+	var path = astargrid.get_id_path(tilemap.local_to_map(global_position),tilemap.local_to_map(target_cell))
 	
 	path.pop_front()
 	
 	if path.is_empty():
 		print("cant find path")
 		moving = false
+		in_animation = false
+		State(1)
 		return
 	
-	var original_position = Vector2(position)
+	var original_position = Vector2(global_position)
 	
-	position = tilemap.map_to_local(path[0])
+	global_position = tilemap.map_to_local(path[0])
 	anim.position = original_position
 	
 	moving = true
@@ -221,7 +227,6 @@ func _on_section_walk_order():
 func setup_grid():
 	astargrid.region = tilemap.get_used_rect()
 	astargrid.cell_size = Vector2i(40,40)  #EXPORT HERE FOR SIZE CHANGES
-	astargrid.default_compute_heuristic = AStarGrid2D.HEURISTIC_MANHATTAN
 	astargrid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
 	astargrid.update()
 	
@@ -234,5 +239,5 @@ func setup_grid():
 			
 			var tile_data = tilemap.get_cell_tile_data(0, tile_position)
 			
-			if tile_data != null or tilemap.get_custom_data("is_solid"):
+			if tile_data == null or tile_data.get_custom_data("is_solid"):
 				astargrid.set_point_solid(tile_position)
