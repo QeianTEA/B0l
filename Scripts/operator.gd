@@ -66,9 +66,17 @@ func _ready():
 func set_selected(value):
 	selected = value
 	box.visible = value
-	
-func _input(_event):
-	pass
+
+var target_cell = null
+
+func _input(event):
+	if event.is_action_pressed("RightClick") && selected:
+		var mouse_pos = get_global_mouse_position()  # Get mouse position in world coordinates
+		var tile_pos = tilemap.local_to_map(to_local(mouse_pos))  # Convert world position to tile coordinates
+		var tile_center = tilemap.map_to_local(tile_pos)  # Convert tile coordinates back to world position
+		
+		target_cell = tile_center
+		move_operator()
 
 func _physics_process(delta):
 	
@@ -153,7 +161,7 @@ func _physics_process(delta):
 					move_and_slide()
 
 func move_operator():
-	var path = astargrid.get_id_path(tilemap.local_to_map(global_position),tilemap.local_to_map(SectionObj.global_position))
+	var path = astargrid.get_id_path(tilemap.local_to_map(position),tilemap.local_to_map(target_cell))
 	
 	path.pop_front()
 	
@@ -162,10 +170,10 @@ func move_operator():
 		moving = false
 		return
 	
-	var original_position = Vector2(global_position)
+	var original_position = Vector2(position)
 	
-	global_position = tilemap.map_to_local(path[0])
-	anim.global_position = original_position
+	position = tilemap.map_to_local(path[0])
+	anim.position = original_position
 	
 	moving = true
 	State(2)  # Set the state to "walking"

@@ -29,7 +29,6 @@ func get_units_in_area(area):
 				u.append(unit)
 				pass
 	return u
-	
 
 #@export var grid = [
 	#[1, 1, 1],
