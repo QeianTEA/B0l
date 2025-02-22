@@ -78,23 +78,23 @@ sprite_frames = SubResource("SpriteFrames_wruk6")
 animation = &"repair"
 autoplay = "idle"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-scale = Vector2(0.017953, 0.0291197)
-shape = SubResource("RectangleShape2D_nkenr")
-
-[node name="HealthBar2" type="Panel" parent="."]
-offset_left = -20.0
-offset_top = -64.0
-offset_right = 20.0
-offset_bottom = -28.0
+[node name="HealthBar2" type="Panel" parent="AnimatedSprite2D"]
+offset_left = -21.2475
+offset_top = -42.6002
+offset_right = 18.7525
+offset_bottom = -6.6002
 theme_override_styles/panel = ExtResource("3_tjxfm")
 metadata/_edit_use_anchors_ = true
 
-[node name="Selected" type="Panel" parent="."]
+[node name="Selected" type="Panel" parent="AnimatedSprite2D"]
 visible = false
-offset_left = -20.0
-offset_top = -50.0
-offset_right = 20.0
-offset_bottom = -42.0
+offset_left = -11.2833
+offset_top = -23.1803
+offset_right = 28.7167
+offset_bottom = -15.1803
 theme_override_styles/panel = ExtResource("4_ts5mu")
 metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(0.017953, 0.0291197)
+shape = SubResource("RectangleShape2D_nkenr")

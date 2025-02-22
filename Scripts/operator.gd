@@ -7,7 +7,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var anim = $AnimatedSprite2D
 @export var tilemap: TileMap
 
-@onready var box = $Selected
+@onready var box = $AnimatedSprite2D/Selected
 
 @export var MaxHp = 100
 @export var MaxSpeed = 10
@@ -97,19 +97,20 @@ func _physics_process(delta):
 		State(2)
 		idle = false
 	
-	if moving && SectionObj != null && !repairMove:
+	if moving && !repairMove:
 		#var direction = (Vector2(section_position.x + 40 , 0) - Vector2(position.x, 0)).normalized()
 		#velocity = direction * speed
 		#if Vector2(position.x, 0).distance_to(Vector2(section_position.x + 40, 0)) < 5:
 		#	moving = false
 		#move_and_slide()
-		anim.global_position = anim.global_position.move_toward(global_position, 0.5)
 		
-		if anim.global_position != global_position:
-			in_animation = true
+		if anim.global_position == global_position:
+			in_animation = false
+			move_operator()
 			return
-			
-		in_animation = false
+		
+		anim.global_position = anim.global_position.move_toward(global_position, 1)
+		
 	elif SectionObj != null:
 		if SectionObj.enemyPresent:   #direkt saldır
 			attacking = true
@@ -176,11 +177,13 @@ func move_operator():
 		State(1)
 		return
 	
-	var original_position = Vector2(global_position)
+	var original_position = global_position
 	
 	global_position = tilemap.map_to_local(path[0])
-	anim.position = original_position
 	
+	anim.global_position = original_position
+	
+	in_animation = true
 	moving = true
 	State(2)  # Set the state to "walking"
 
