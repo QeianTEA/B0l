@@ -5,10 +5,13 @@
 [ext_resource type="Texture2D" uid="uid://rk0u8mt4vtas" path="res://Temp/icon2.svg" id="3_outku"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qsmv0"]
+radius = 68.4105
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ayi22"]
+radius = 66.2722
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_32s2m"]
+size = Vector2(252, 363.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3xjr1"]
 size = Vector2(430, 2.01)
@@ -22,37 +25,47 @@ left_wheel = NodePath("WheelLeft")
 right_wheel = NodePath("WheelRight")
 
 [node name="Sprite2D" type="Sprite2D" parent="Tank"]
+position = Vector2(7, -154.5)
+scale = Vector2(2, 3.41406)
 texture = ExtResource("2_j8u6y")
 
 [node name="WheelLeft" type="RigidBody2D" parent="Tank"]
-position = Vector2(-50, 50)
+position = Vector2(-101, 47)
 scale = Vector2(0.5, 0.5)
 
 [node name="Sprite2D" type="Sprite2D" parent="Tank/WheelLeft"]
+position = Vector2(4, -6)
 texture = ExtResource("3_outku")
-
-[node name="PinJoint2D" type="PinJoint2D" parent="Tank/WheelLeft"]
-node_a = NodePath("../..")
-node_b = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Tank/WheelLeft"]
 shape = SubResource("CircleShape2D_qsmv0")
 
+[node name="DampedSpringJoint2D" type="DampedSpringJoint2D" parent="Tank/WheelLeft"]
+node_a = NodePath("../..")
+node_b = NodePath("..")
+length = 15.0
+stiffness = 50.0
+damping = 0.5
+
 [node name="WheelRight" type="RigidBody2D" parent="Tank"]
-position = Vector2(50, 50)
+position = Vector2(105, 46)
 scale = Vector2(0.5, 0.5)
 
 [node name="Sprite2D" type="Sprite2D" parent="Tank/WheelRight"]
 texture = ExtResource("3_outku")
 
-[node name="PinJoint2D" type="PinJoint2D" parent="Tank/WheelRight"]
-node_a = NodePath("../..")
-node_b = NodePath("..")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Tank/WheelRight"]
 shape = SubResource("CircleShape2D_ayi22")
 
+[node name="DampedSpringJoint2D" type="DampedSpringJoint2D" parent="Tank/WheelRight"]
+node_a = NodePath("../..")
+node_b = NodePath("..")
+length = 15.0
+stiffness = 50.0
+damping = 0.5
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Tank"]
+position = Vector2(8, -184.25)
 shape = SubResource("RectangleShape2D_32s2m")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
