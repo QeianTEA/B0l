@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://d107423t4vukv"]
+[gd_scene load_steps=8 format=3 uid="uid://lol7c4x7wnhm"]
 
 [ext_resource type="Script" path="res://Scripts/TankMovement.gd" id="1_7e2v0"]
 [ext_resource type="Texture2D" uid="uid://bxslsg4lsf2cv" path="res://Assets/Misc/icon.svg" id="2_j8u6y"]
@@ -11,7 +11,7 @@ radius = 68.4105
 radius = 66.2722
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_32s2m"]
-size = Vector2(252, 363.5)
+size = Vector2(252, 428.375)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3xjr1"]
 size = Vector2(430, 2.01)
@@ -20,6 +20,10 @@ size = Vector2(430, 2.01)
 position = Vector2(169, -106)
 
 [node name="Tank" type="RigidBody2D" parent="." node_paths=PackedStringArray("left_wheel", "right_wheel")]
+position = Vector2(168, 269)
+collision_layer = 2
+collision_mask = 2
+mass = 5.0
 script = ExtResource("1_7e2v0")
 left_wheel = NodePath("WheelLeft")
 right_wheel = NodePath("WheelRight")
@@ -43,9 +47,9 @@ shape = SubResource("CircleShape2D_qsmv0")
 [node name="DampedSpringJoint2D" type="DampedSpringJoint2D" parent="Tank/WheelLeft"]
 node_a = NodePath("../..")
 node_b = NodePath("..")
-length = 15.0
-stiffness = 50.0
-damping = 0.5
+length = 5.0
+stiffness = 64.0
+damping = 2.0
 
 [node name="WheelRight" type="RigidBody2D" parent="Tank"]
 position = Vector2(105, 46)
@@ -60,15 +64,18 @@ shape = SubResource("CircleShape2D_ayi22")
 [node name="DampedSpringJoint2D" type="DampedSpringJoint2D" parent="Tank/WheelRight"]
 node_a = NodePath("../..")
 node_b = NodePath("..")
-length = 15.0
-stiffness = 50.0
-damping = 0.5
+length = 5.0
+stiffness = 64.0
+damping = 2.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Tank"]
-position = Vector2(8, -184.25)
+position = Vector2(4, -153.188)
 shape = SubResource("RectangleShape2D_32s2m")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(285, 441)
+collision_layer = 3
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(24, 461)
