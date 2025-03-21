@@ -10,7 +10,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var box = $AnimatedSprite2D/Selected
 
 @export var MaxHp = 100
-@export var MaxSpeed = 10
+@export var MaxSpeed = 5
 var health
 var speed: int
 
@@ -19,7 +19,7 @@ var section_position = Vector2()
 var operatorNum = 0
 
 var walkDirection = 1
-var walkBobble = 5            #USE THIS BOING BOING MOVING YES
+var walkBobble = 5            #USE THIS BOING BOING MOVING YES ???
 
 var SectionObj = null
 var full:bool:
@@ -57,13 +57,6 @@ func _ready():
 	health = MaxHp;
 	click_position = position
 	#State(1)
-	
-	var chooser = randi_range(0, 5)
-	
-	if chooser > 2:
-		walkDirection = Vector2(1, 0)
-	else:
-		walkDirection = Vector2(-1, 0)
 
 func set_selected(value):
 	selected = value
@@ -101,7 +94,7 @@ func _physics_process(delta):
 		State(2)
 		idle = false
 	
-	if moving && !repairMove:
+	if moving && !repairMove :
 		#var direction = (Vector2(section_position.x + 40 , 0) - Vector2(position.x, 0)).normalized()
 		#velocity = direction * speed
 		#if Vector2(position.x, 0).distance_to(Vector2(section_position.x + 40, 0)) < 5:
@@ -118,7 +111,7 @@ func _physics_process(delta):
 		else:
 			anim.global_position = anim.global_position.move_toward(global_position, 1)
 		
-	elif SectionObj != null:
+	elif SectionObj != null && !on_his_way:
 		if SectionObj.enemyPresent:   #direkt saldır
 			attacking = true
 			#moving = false
@@ -137,7 +130,7 @@ func _physics_process(delta):
 			attacking = false
 			State(5)
 	
-	if idle && !moving:
+	if idle && !on_his_way:
 		velocity = walkDirection * speed
 		move_and_slide()
 	
@@ -195,12 +188,7 @@ func move_operator():
 	global_position = tilemap.map_to_local(path[0])
 	anim.global_position = original_position
 	
-
-	
-	if jumping:
-		State(6) # Jump!
-	else:
-		State(2)  # Set the state to "walking"
+	State(2)  # Set the state to "walking"
 	
 	if jumping:
 		moving = false
@@ -212,12 +200,23 @@ func State(nunmber):
 	match(nunmber):
 		1: #idle
 			anim.play("idle")
+			if !idle:
+				var chooser = randi_range(0, 5)
+				if chooser > 2:
+					walkDirection = Vector2(1, 0)
+				else:
+					walkDirection = Vector2(-1, 0)
+			
 			idle = true
 			repairing = false
 			checking = false
 			speed = MaxSpeed/3
+			print("idle")
 		2: #moving
-			anim.play("walk")
+			if jumping:
+				anim.play("jump")
+			else:
+				anim.play("walk")
 			z_index = 2
 			repairing = false
 			repairMove = false
@@ -239,17 +238,9 @@ func State(nunmber):
 		5: #checking gun
 			anim.play("check")
 			checking = true
+			idle = false
 			repairing = false
 			z_index = 1
-		6: # jumping
-			anim.play("jump")
-			z_index = 2
-			repairing = false
-			repairMove = false
-			operatorNum = 0
-			idle = false
-			checking = false
-			speed = MaxSpeed
 
 @onready var gameScript = get_tree().root.get_node("GameScene")
 

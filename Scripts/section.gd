@@ -15,7 +15,6 @@ func _ready():
 	sitrep()
 
 func _physics_process(delta):
-	
 	sitrep()
 
 func sitrep(): #situation report -> sitrep get it?

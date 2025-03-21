@@ -5,9 +5,9 @@ extends RigidBody2D
 @export var wheel3: RigidBody2D
 @export var wheel4: RigidBody2D
 
-const WHEEL_FORCE = 500
-const MAX_SPEED = 800
-const TORQUE_FORCE = 300
+const WHEEL_FORCE = 2000
+const MAX_SPEED = 1600
+const TORQUE_FORCE = 1000
 
 func _physics_process(delta):
 	var direction = 0

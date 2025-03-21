@@ -84,7 +84,7 @@ texture = ExtResource("2_6l7va")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(1.77253, 2.157)
 sprite_frames = SubResource("SpriteFrames_wruk6")
-animation = &"repair"
+animation = &"idle"
 autoplay = "idle"
 
 [node name="HealthBar2" type="Panel" parent="AnimatedSprite2D"]

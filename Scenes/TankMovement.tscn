@@ -1,8 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://lol7c4x7wnhm"]
+[gd_scene load_steps=10 format=3 uid="uid://lol7c4x7wnhm"]
 
 [ext_resource type="Script" path="res://Scripts/TankMovement.gd" id="1_7e2v0"]
 [ext_resource type="Texture2D" uid="uid://bxslsg4lsf2cv" path="res://Assets/Misc/icon.svg" id="2_j8u6y"]
+[ext_resource type="PackedScene" uid="uid://u7x6fdrulxd1" path="res://Scenes/Temp/move_test.tscn" id="3_asnc0"]
 [ext_resource type="Texture2D" uid="uid://rk0u8mt4vtas" path="res://Temp/icon2.svg" id="3_outku"]
+[ext_resource type="PackedScene" uid="uid://bfxmg6fiqhc80" path="res://Scenes/camera_2d.tscn" id="5_br6oa"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qsmv0"]
 radius = 68.4105
@@ -11,7 +13,7 @@ radius = 68.4105
 radius = 66.2722
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_32s2m"]
-size = Vector2(252, 428.375)
+size = Vector2(252, 180.276)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3xjr1"]
 size = Vector2(430, 2.01)
@@ -22,9 +24,9 @@ scale = Vector2(0.567582, 0.567582)
 
 [node name="Tank" type="RigidBody2D" parent="." node_paths=PackedStringArray("wheel1", "wheel2", "wheel3", "wheel4")]
 position = Vector2(173, 432)
-collision_layer = 2
-collision_mask = 2
-mass = 5.0
+collision_layer = 32
+collision_mask = 32
+mass = 2.0
 script = ExtResource("1_7e2v0")
 wheel1 = NodePath("Wheel1")
 wheel2 = NodePath("Wheel2")
@@ -32,23 +34,30 @@ wheel3 = NodePath("Wheel3")
 wheel4 = NodePath("Wheel4")
 
 [node name="Sprite2D" type="Sprite2D" parent="Tank"]
-position = Vector2(7, -154.5)
-scale = Vector2(2, 3.41406)
+position = Vector2(6.7096, -69.0571)
+scale = Vector2(1.91237, 1.6347)
 texture = ExtResource("2_j8u6y")
 
+[node name="GameScene" parent="Tank/Sprite2D" instance=ExtResource("3_asnc0")]
+position = Vector2(-73.7036, -80.8341)
+scale = Vector2(0.522911, 0.611734)
+
 [node name="Wheel1" type="RigidBody2D" parent="Tank"]
-position = Vector2(-101, 47)
-scale = Vector2(0.5, 0.5)
+position = Vector2(-120.144, 47)
+collision_layer = 16
+collision_mask = 16
 
 [node name="Sprite2D" type="Sprite2D" parent="Tank/Wheel1"]
 position = Vector2(4, -6)
+scale = Vector2(0.595, 0.595)
 texture = ExtResource("3_outku")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Tank/Wheel1"]
-scale = Vector2(0.5, 0.5)
+scale = Vector2(0.595, 0.595)
 shape = SubResource("CircleShape2D_qsmv0")
 
 [node name="DampedSpringJoint2D" type="DampedSpringJoint2D" parent="Tank/Wheel1"]
+scale = Vector2(0.009, 0.1)
 node_a = NodePath("../..")
 node_b = NodePath("..")
 length = 1.0
@@ -57,17 +66,20 @@ damping = 16.0
 
 [node name="Wheel2" type="RigidBody2D" parent="Tank"]
 position = Vector2(-28, 47)
-scale = Vector2(0.5, 0.5)
+collision_layer = 16
+collision_mask = 16
 
 [node name="Sprite2D" type="Sprite2D" parent="Tank/Wheel2"]
 position = Vector2(4, -6)
+scale = Vector2(0.595, 0.595)
 texture = ExtResource("3_outku")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Tank/Wheel2"]
-scale = Vector2(0.5, 0.5)
+scale = Vector2(0.595, 0.595)
 shape = SubResource("CircleShape2D_qsmv0")
 
 [node name="DampedSpringJoint2D" type="DampedSpringJoint2D" parent="Tank/Wheel2"]
+scale = Vector2(0.009, 0.1)
 node_a = NodePath("../..")
 node_b = NodePath("..")
 length = 1.0
@@ -75,17 +87,20 @@ stiffness = 64.0
 damping = 16.0
 
 [node name="Wheel3" type="RigidBody2D" parent="Tank"]
-position = Vector2(44, 46)
-scale = Vector2(0.5, 0.5)
+position = Vector2(63.0891, 41.94)
+collision_layer = 16
+collision_mask = 16
 
 [node name="Sprite2D" type="Sprite2D" parent="Tank/Wheel3"]
+scale = Vector2(0.595, 0.595)
 texture = ExtResource("3_outku")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Tank/Wheel3"]
-scale = Vector2(0.5, 0.5)
+scale = Vector2(0.595, 0.595)
 shape = SubResource("CircleShape2D_ayi22")
 
 [node name="DampedSpringJoint2D" type="DampedSpringJoint2D" parent="Tank/Wheel3"]
+scale = Vector2(0.009, 0.1)
 node_a = NodePath("../..")
 node_b = NodePath("..")
 length = 1.0
@@ -93,17 +108,20 @@ stiffness = 64.0
 damping = 16.0
 
 [node name="Wheel4" type="RigidBody2D" parent="Tank"]
-position = Vector2(112, 46)
-scale = Vector2(0.5, 0.5)
+position = Vector2(147.658, 41.94)
+collision_layer = 16
+collision_mask = 16
 
 [node name="Sprite2D" type="Sprite2D" parent="Tank/Wheel4"]
+scale = Vector2(0.595, 0.595)
 texture = ExtResource("3_outku")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Tank/Wheel4"]
-scale = Vector2(0.5, 0.5)
+scale = Vector2(0.595, 0.595)
 shape = SubResource("CircleShape2D_ayi22")
 
 [node name="DampedSpringJoint2D" type="DampedSpringJoint2D" parent="Tank/Wheel4"]
+scale = Vector2(0.009, 0.1)
 node_a = NodePath("../..")
 node_b = NodePath("..")
 length = 1.0
@@ -111,15 +129,28 @@ stiffness = 64.0
 damping = 16.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Tank"]
-position = Vector2(4, -153.188)
+position = Vector2(3.18588, -74.4109)
+scale = Vector2(1.05625, 1.05625)
 shape = SubResource("RectangleShape2D_32s2m")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(285, 441)
-collision_layer = 3
-collision_mask = 3
+collision_layer = 48
+collision_mask = 48
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(24, 461)
-scale = Vector2(100, 100)
+scale = Vector2(50, 50)
 shape = SubResource("RectangleShape2D_3xjr1")
+
+[node name="Camera2D" parent="." instance=ExtResource("5_br6oa")]
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="DrawBox" type="Panel" parent="UI"]
+unique_name_in_owner = true
+offset_left = -45.0
+offset_top = -42.0
+offset_right = -5.0
+offset_bottom = -2.0
+metadata/_edit_use_anchors_ = true
