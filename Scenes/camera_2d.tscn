@@ -6,3 +6,5 @@
 limit_left = 0
 limit_top = 0
 script = ExtResource("1_ngf1u")
+
+[connection signal="area_selected" from="." to="." method="_on_area_selected"]

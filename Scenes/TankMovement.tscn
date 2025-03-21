@@ -17,7 +17,8 @@ size = Vector2(252, 428.375)
 size = Vector2(430, 2.01)
 
 [node name="GameScene" type="Node2D"]
-position = Vector2(169, -106)
+position = Vector2(148, 26)
+scale = Vector2(0.567582, 0.567582)
 
 [node name="Tank" type="RigidBody2D" parent="." node_paths=PackedStringArray("wheel1", "wheel2", "wheel3", "wheel4")]
 position = Vector2(173, 432)

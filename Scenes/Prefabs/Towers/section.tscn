@@ -11,7 +11,7 @@ size = Vector2(0.208333, 20)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gryk8"]
 
 [node name="Section" type="Area2D"]
-scale = Vector2(0.84, 1)
+scale = Vector2(0.352781, 0.0671963)
 collision_mask = 7
 script = ExtResource("1_gjnqx")
 

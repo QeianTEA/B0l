@@ -34,12 +34,13 @@ var attacking = false    #FIREEE!!!
 var repairing = false    #Fixing the equipment
 var repairMove = false
 var moving = false       #Moving horizontal
-var jump = false         #Moving vertical
+var jumping = false         #Moving vertical
 var checking = false     #Checking gun
 var idle = false         #Idle moving
 
 var statusChanged = false
 var in_animation = false
+var on_his_way = false
 
 
 var astargrid = AStarGrid2D.new()
@@ -71,15 +72,18 @@ func set_selected(value):
 var target_cell = null
 
 func _input(event):
-	if event.is_action_pressed("RightClick") && selected:
+	if event.is_action_pressed("RightClick") && selected :
 		var mouse_pos = get_global_mouse_position()  # Get mouse position in world coordinates
 		
+		on_his_way = true
+		
 		target_cell = mouse_pos
-		move_operator()
+		if !in_animation:
+			move_operator()
 
-func _process(delta):
-	if moving && !in_animation:
-		move_operator()
+#func _process(delta):
+	#if moving && !in_animation:
+		#move_operator()
 
 func _physics_process(delta):
 	
@@ -109,7 +113,10 @@ func _physics_process(delta):
 			move_operator()
 			return
 		
-		anim.global_position = anim.global_position.move_toward(global_position, 1)
+		if jumping:
+			anim.global_position = anim.global_position.move_toward(global_position, 1.5)
+		else:
+			anim.global_position = anim.global_position.move_toward(global_position, 1)
 		
 	elif SectionObj != null:
 		if SectionObj.enemyPresent:   #direkt saldır
@@ -165,27 +172,41 @@ func _physics_process(delta):
 					move_and_slide()
 
 func move_operator():
-	print(tilemap.local_to_map(target_cell))
 	var path = astargrid.get_id_path(tilemap.local_to_map(global_position),tilemap.local_to_map(target_cell))
 	
 	path.pop_front()
 	
 	if path.is_empty():
 		print("cant find path")
+		on_his_way = false
 		moving = false
 		in_animation = false
 		State(1)
 		return
 	
+	in_animation = true
+	
+	if path[0].y != tilemap.local_to_map(global_position).y:
+		jumping = true
+	else:
+		jumping = false
+	
 	var original_position = global_position
-	
 	global_position = tilemap.map_to_local(path[0])
-	
 	anim.global_position = original_position
 	
-	in_animation = true
+
+	
+	if jumping:
+		State(6) # Jump!
+	else:
+		State(2)  # Set the state to "walking"
+	
+	if jumping:
+		moving = false
+		await get_tree().create_timer(0.3).timeout
+	
 	moving = true
-	State(2)  # Set the state to "walking"
 
 func State(nunmber):
 	match(nunmber):
@@ -195,7 +216,7 @@ func State(nunmber):
 			repairing = false
 			checking = false
 			speed = MaxSpeed/3
-		2: #moving / jumping
+		2: #moving
 			anim.play("walk")
 			z_index = 2
 			repairing = false
@@ -204,7 +225,6 @@ func State(nunmber):
 			idle = false
 			checking = false
 			speed = MaxSpeed
-			print("walking")
 		3: #attacking
 			anim.play("attack")
 			repairing = false
@@ -221,16 +241,27 @@ func State(nunmber):
 			checking = true
 			repairing = false
 			z_index = 1
+		6: # jumping
+			anim.play("jump")
+			z_index = 2
+			repairing = false
+			repairMove = false
+			operatorNum = 0
+			idle = false
+			checking = false
+			speed = MaxSpeed
 
 @onready var gameScript = get_tree().root.get_node("GameScene")
 
-func _on_section_walk_order():
-	move_operator()
+#func _on_section_walk_order():
+	#if !in_animation:
+		#move_operator()
 
 func setup_grid():
 	astargrid.region = tilemap.get_used_rect()
 	astargrid.cell_size = Vector2i(40,40)  #EXPORT HERE FOR SIZE CHANGES
 	astargrid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
+	astargrid.jumping_enabled = false
 	astargrid.update()
 	
 	var region_size = astargrid.region.size

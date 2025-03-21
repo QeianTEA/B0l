@@ -21,7 +21,7 @@ func _physics_process(delta):
 func sitrep(): #situation report -> sitrep get it?
 	for e in bodiesInside.size():
 		operatorNumber = bodiesInside.size()
-		if !bodiesInside[e].moving: 
+		if !bodiesInside[e].on_his_way: 
 			if operatorNumber > MaxOperators:
 				if e > MaxOperators:
 					bodiesInside[e].full = true
@@ -39,11 +39,7 @@ func _on_body_entered(body):
 			body.SectionObj = section
 		
 			print(operatorNumber)
-			pass
-	
-
-
-
+			pass	
 
 func _on_body_exited(body):
 	if body.is_in_group("Operators"):
@@ -51,15 +47,15 @@ func _on_body_exited(body):
 		bodiesInside.erase(body)
 		pass
 
-func _on_input_event(viewport, event, shape_idx):
-	if event is InputEventMouseButton:
-		if event.button_index == 2 and event.pressed:
-			for gameObject in get_tree().get_nodes_in_group("Operators"):
-				if gameObject.selected:
-					gameObject.section_position = position
-					gameObject.SectionObj = section
-					gameObject._on_section_walk_order()
-					print("order sent")
+#func _on_input_event(viewport, event, shape_idx):
+	#if event is InputEventMouseButton:
+		#if event.button_index == 2 and event.pressed:
+			#for gameObject in get_tree().get_nodes_in_group("Operators"):
+				#if gameObject.selected:
+					#gameObject.section_position = position
+					#gameObject.SectionObj = section
+					#gameObject._on_section_walk_order()
+					#print("order sent")
 
 #func _on_area_2d_body_entered_middle(body):
 #	if body.is_in_group("Operators"):
